@@ -58,8 +58,8 @@ class ShopE2ETest {
         placeOrderButton.click();
 
         // Assert
-//        var confirmationMessage = seleniumDriver.findElement(By.cssSelector("[role='alert']"));
-//        assertThat(confirmationMessage.getText())
-//                .isEqualTo("Success! Total price is $12.50");
+        var confirmationMessage = seleniumDriver.findElement(By.cssSelector("[role='alert']"));
+        assertThat(confirmationMessage.getText())
+                .isEqualTo("Success! Total price is $12.50");
     }
 }
