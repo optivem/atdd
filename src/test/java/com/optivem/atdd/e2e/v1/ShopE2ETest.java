@@ -1,4 +1,3 @@
-// src/test/java/com/optivem/atdd/e2e/ShopE2ETest.java
 package com.optivem.atdd.e2e.v1;
 
 import org.junit.jupiter.api.*;
