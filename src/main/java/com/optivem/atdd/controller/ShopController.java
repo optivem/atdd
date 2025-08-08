@@ -1,8 +1,7 @@
 package com.optivem.atdd.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class ShopController {
@@ -13,12 +12,33 @@ public class ShopController {
         return """
             <html>
             <body>
-                <input aria-label='SKU' />
-                <input aria-label='Quantity' />
-                <button aria-label='Place Order'>Place Order</button>
+                <form method='post' action='/shop'>
+                    <input name='sku' aria-label='SKU' />
+                    <input name='quantity' aria-label='Quantity' />
+                    <button type='submit' aria-label='Place Order'>Place Order</button>
+                </form>
                 <div role='alert'></div>
             </body>
             </html>
             """;
+    }
+
+    @PostMapping("/shop")
+    @ResponseBody
+    public String placeOrder(@RequestParam String sku, @RequestParam int quantity) {
+        double price = 2.50; // Hardcoded for APPLE1001
+        double total = price * quantity;
+        return """
+            <html>
+            <body>
+                <form method='post' action='/shop'>
+                    <input name='sku' aria-label='SKU' value='%s' />
+                    <input name='quantity' aria-label='Quantity' value='%d' />
+                    <button type='submit' aria-label='Place Order'>Place Order</button>
+                </form>
+                <div role='alert'>Success! Total price is $%.2f</div>
+            </body>
+            </html>
+            """.formatted(sku, quantity, total);
     }
 }

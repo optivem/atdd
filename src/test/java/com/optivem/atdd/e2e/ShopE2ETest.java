@@ -40,16 +40,16 @@ class ShopE2ETest {
         seleniumDriver.get(baseUrl + "/shop");
 
         // TODO: VJ: Add later
-//        var skuInput = seleniumDriver.findElement(By.cssSelector("[aria-label='SKU']"));
-//        skuInput.sendKeys("APPLE1001");
-//
-//        var quantityInput = seleniumDriver.findElement(By.cssSelector("[aria-label='Quantity']"));
-//        quantityInput.sendKeys("5");
-//
-//        var placeOrderButton = seleniumDriver.findElement(By.cssSelector("[aria-label='Place Order']"));
-//        placeOrderButton.click();
-//
-//        // Assert
+        var skuInput = seleniumDriver.findElement(By.cssSelector("[aria-label='SKU']"));
+        skuInput.sendKeys("APPLE1001");
+
+        var quantityInput = seleniumDriver.findElement(By.cssSelector("[aria-label='Quantity']"));
+        quantityInput.sendKeys("5");
+
+        var placeOrderButton = seleniumDriver.findElement(By.cssSelector("[aria-label='Place Order']"));
+        placeOrderButton.click();
+
+        // Assert
 //        var confirmationMessage = seleniumDriver.findElement(By.cssSelector("[role='alert']"));
 //        assertThat(confirmationMessage.getText())
 //                .isEqualTo("Success! Total price is $12.50");
