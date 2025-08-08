@@ -1,5 +1,5 @@
 // src/test/java/com/optivem/atdd/e2e/ShopE2ETest.java
-package com.optivem.atdd.e2e;
+package com.optivem.atdd.e2e.v1;
 
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.*;
@@ -7,10 +7,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
-
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
