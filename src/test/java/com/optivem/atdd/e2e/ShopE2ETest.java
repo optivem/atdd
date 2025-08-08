@@ -25,7 +25,9 @@ class ShopE2ETest {
 
     @BeforeEach
     void setUp() {
-        seleniumDriver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless=new");
+        seleniumDriver = new ChromeDriver(options);
 
         baseUrl = "http://localhost:" + port; // NOTE: VJ: In real life we'd want to set the actual string
         // Optionally: set up ERP test instance price for APPLE1001 to $2.50
