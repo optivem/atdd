@@ -30,8 +30,6 @@ class ShopE2ETest {
         seleniumDriver = new ChromeDriver(options);
 
         baseUrl = "http://localhost:" + port; // NOTE: VJ: In real life we'd want to set the actual string
-        // Optionally: set up ERP test instance price for APPLE1001 to $2.50
-        // e.g., call ERP REST API here
     }
 
     @AfterEach
@@ -41,9 +39,6 @@ class ShopE2ETest {
 
     @Test
     void shouldCompletePurchaseSuccessfully() {
-        // Arrange: Set price via ERP API (pseudo-code)
-        // erpApi.setPrice("APPLE1001", 2.50);
-
         // Act
         seleniumDriver.get(baseUrl + "/shop");
 
