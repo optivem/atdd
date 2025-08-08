@@ -8,6 +8,8 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -23,9 +25,8 @@ class ShopE2ETest {
 
     @BeforeEach
     void setUp() {
-        var options = new ChromeOptions();
-        options.addArguments("--user-data-dir=/tmp/chrome-profile-" + UUID.randomUUID());
-        seleniumDriver = new ChromeDriver(options);
+        seleniumDriver = new ChromeDriver();
+
         baseUrl = "http://localhost:" + port; // NOTE: VJ: In real life we'd want to set the actual string
         // Optionally: set up ERP test instance price for APPLE1001 to $2.50
         // e.g., call ERP REST API here
