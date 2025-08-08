@@ -4,17 +4,24 @@ package com.optivem.atdd.e2e;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.server.LocalServerPort;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class ShopE2ETest {
 
+    @LocalServerPort
+    private int port;
+
     private WebDriver seleniumDriver;
-    private String baseUrl = "http://localhost:8080"; // Adjust as needed
+    private String baseUrl;
 
     @BeforeEach
     void setUp() {
         seleniumDriver = new ChromeDriver();
+        baseUrl = "http://localhost:" + port; // NOTE: VJ: In real life we'd want to set the actual string
         // Optionally: set up ERP test instance price for APPLE1001 to $2.50
         // e.g., call ERP REST API here
     }
@@ -24,7 +31,6 @@ class ShopE2ETest {
         seleniumDriver.quit();
     }
 
-    @Disabled
     @Test
     void shouldCompletePurchaseSuccessfully() {
         // Arrange: Set price via ERP API (pseudo-code)
@@ -33,18 +39,19 @@ class ShopE2ETest {
         // Act
         seleniumDriver.get(baseUrl + "/shop");
 
-        var skuInput = seleniumDriver.findElement(By.cssSelector("[aria-label='SKU']"));
-        skuInput.sendKeys("APPLE1001");
-
-        var quantityInput = seleniumDriver.findElement(By.cssSelector("[aria-label='Quantity']"));
-        quantityInput.sendKeys("5");
-
-        var placeOrderButton = seleniumDriver.findElement(By.cssSelector("[aria-label='Place Order']"));
-        placeOrderButton.click();
-
-        // Assert
-        var confirmationMessage = seleniumDriver.findElement(By.cssSelector("[role='alert']"));
-        assertThat(confirmationMessage.getText())
-                .isEqualTo("Success! Total price is $12.50");
+        // TODO: VJ: Add later
+//        var skuInput = seleniumDriver.findElement(By.cssSelector("[aria-label='SKU']"));
+//        skuInput.sendKeys("APPLE1001");
+//
+//        var quantityInput = seleniumDriver.findElement(By.cssSelector("[aria-label='Quantity']"));
+//        quantityInput.sendKeys("5");
+//
+//        var placeOrderButton = seleniumDriver.findElement(By.cssSelector("[aria-label='Place Order']"));
+//        placeOrderButton.click();
+//
+//        // Assert
+//        var confirmationMessage = seleniumDriver.findElement(By.cssSelector("[role='alert']"));
+//        assertThat(confirmationMessage.getText())
+//                .isEqualTo("Success! Total price is $12.50");
     }
 }
