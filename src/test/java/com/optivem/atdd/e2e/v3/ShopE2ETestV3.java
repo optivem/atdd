@@ -38,7 +38,6 @@ public class ShopE2ETestV3 {
         var shop = new ShopDsl(new UiDriver(seleniumDriver, baseUrl + "/shop"));
 
         shop.placeOrder("sku: 8", "quantity: 5");
-        // TODO: VJ: Need to introduce Stub due to calculation logic being in the backend
-        // shop.assertConfirmation("message: Success! Total price is $12.50");
+        shop.assertConfirmation();
     }
 }

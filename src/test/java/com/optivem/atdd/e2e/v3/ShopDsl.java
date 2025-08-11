@@ -1,5 +1,7 @@
 package com.optivem.atdd.e2e.v3;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class ShopDsl {
     private final UiDriver driver;
 
@@ -17,12 +19,8 @@ public class ShopDsl {
         driver.submitOrder();
     }
 
-    public void assertConfirmation(String... args) {
-        var params = new Params(args);
-        var expectedMessage = params.getString("message", "");
-        var actualMessage = driver.getConfirmationMessage();
-        if (!actualMessage.equals(expectedMessage)) {
-            throw new AssertionError("Expected: " + expectedMessage + ", but was: " + actualMessage);
-        }
+    public void assertConfirmation() {
+        var message = driver.getConfirmationMessage();
+        assertThat(message).matches("Success! Total price is \\$\\d+(\\.\\d{2})?");
     }
 }
