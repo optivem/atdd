@@ -12,7 +12,7 @@ public class ShopDsl {
     public void placeOrder(String... args) {
         driver.load();
         var params = new Params(args);
-        var sku = params.getString("sku", "DEFAULT_SKU");
+        var sku = params.getString("sku", "99");
         var quantity = params.getInteger("quantity", "1");
         driver.setSku(sku);
         driver.setQuantity(quantity);

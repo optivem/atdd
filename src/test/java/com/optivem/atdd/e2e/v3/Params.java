@@ -17,7 +17,6 @@ public class Params {
         return paramMap.getOrDefault(key, defaultValue);
     }
 
-    // TODO: VJ: Should be an int actually
     public int getInteger(String key, String defaultValue) {
         var value = paramMap.getOrDefault(key, defaultValue);
         return Integer.parseInt(value);
