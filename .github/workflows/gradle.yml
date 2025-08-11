@@ -38,7 +38,7 @@ jobs:
       run: chmod +x ./gradlew
 
     - name: Run Docker Compose Up
-      run: docker compose up
+      run: docker compose up -d
 
     - name: Build with Gradle Wrapper
       run: ./gradlew build --info --stacktrace
