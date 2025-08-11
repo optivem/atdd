@@ -51,9 +51,10 @@ public class ShopController {
 
     private double fetchPriceFromApi(String sku) {
         try {
+            var url = "https://dummyjson.com" + "/products/" + sku;
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create("https://dummyjson.com/products/" + sku))
+                    .uri(URI.create(url))
                     .build();
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             ObjectMapper mapper = new ObjectMapper();
