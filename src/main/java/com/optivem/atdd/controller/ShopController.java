@@ -14,8 +14,8 @@ import java.net.http.HttpResponse;
 @Controller
 public class ShopController {
 
-    @Value("${shop.api.base-url}")
-    private String apiBaseUrl;
+    @Value("${erp.url}")
+    private String erpUrl;
 
     @GetMapping("/shop")
     @ResponseBody
@@ -55,7 +55,7 @@ public class ShopController {
 
     private double fetchPriceFromApi(String sku) {
         try {
-            var url = apiBaseUrl + "/products/" + sku;
+            var url = erpUrl + "/products/" + sku;
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(url))
