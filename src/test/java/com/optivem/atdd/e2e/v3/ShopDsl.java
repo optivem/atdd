@@ -11,7 +11,7 @@ public class ShopDsl {
         driver.load();
         var params = new Params(args);
         var sku = params.getString("sku", "DEFAULT_SKU");
-        var quantity = params.getDecimal("quantity", "1");
+        var quantity = params.getInteger("quantity", "1");
         driver.setSku(sku);
         driver.setQuantity(quantity);
         driver.submitOrder();

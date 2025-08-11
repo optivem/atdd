@@ -18,8 +18,8 @@ public class Params {
     }
 
     // TODO: VJ: Should be an int actually
-    public double getDecimal(String key, String defaultValue) {
+    public int getInteger(String key, String defaultValue) {
         var value = paramMap.getOrDefault(key, defaultValue);
-        return Double.parseDouble(value);
+        return Integer.parseInt(value);
     }
 }

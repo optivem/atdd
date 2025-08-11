@@ -33,7 +33,7 @@ public class ShopController {
     @PostMapping("/shop")
     @ResponseBody
     public String placeOrder(@RequestParam String sku, @RequestParam int quantity) {
-        // double price = 2.50; // Hardcoded for APPLE1001
+        // double price = 2.50; // TODO: VJ: Remove: Hardcoded for APPLE1001
         double price = fetchPriceFromApi();
         double total = price * quantity;
         return """
