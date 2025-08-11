@@ -22,3 +22,12 @@ spring:
       on-profile: e2e
 erp:
   url: https://dummyjson.com
+
+---
+spring:
+  config:
+    activate:
+      on-profile: acc
+
+erp:
+  url: http://localhost:8089

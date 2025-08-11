@@ -23,4 +23,11 @@ public class ShopDsl {
         var message = driver.getConfirmationMessage();
         assertThat(message).matches("Success! Total price is \\$\\d+(\\.\\d{2})?");
     }
+
+    public void assertConfirmation(String... args) {
+        var params = new com.optivem.atdd.e2e.v3.Params(args);
+        var message = driver.getConfirmationMessage();
+        var expectedMessage = params.getString("message", "");
+        assertThat(message).isEqualTo(expectedMessage);
+    }
 }

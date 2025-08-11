@@ -40,6 +40,6 @@ public class ShopE2ETestV3 {
         var shop = new ShopDsl(new UiDriver(seleniumDriver, baseUrl + "/shop"));
 
         shop.placeOrder("sku: 8", "quantity: 5");
-        shop.assertConfirmation();
+        shop.assertConfirmation("message: Success! Total price is \\$\\d+(\\.\\d{2})?");
     }
 }

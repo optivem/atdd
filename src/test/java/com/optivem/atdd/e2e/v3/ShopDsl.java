@@ -19,8 +19,10 @@ public class ShopDsl {
         driver.submitOrder();
     }
 
-    public void assertConfirmation() {
+    public void assertConfirmation(String... args) {
+        var params = new Params(args);
         var message = driver.getConfirmationMessage();
-        assertThat(message).matches("Success! Total price is \\$\\d+(\\.\\d{2})?");
+        var expectedMessage = params.getString("message", "");
+        assertThat(message).matches(expectedMessage);
     }
 }

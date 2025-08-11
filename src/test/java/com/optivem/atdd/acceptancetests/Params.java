@@ -1,5 +1,6 @@
 package com.optivem.atdd.acceptancetests;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -20,5 +21,11 @@ public class Params {
     public int getInteger(String key, String defaultValue) {
         var value = paramMap.getOrDefault(key, defaultValue);
         return Integer.parseInt(value);
+    }
+
+    public BigDecimal getDecimal(String key, String defaultValue) {
+        var value = paramMap.getOrDefault(key, defaultValue);
+        var parsed = Double.parseDouble(value);
+        return BigDecimal.valueOf(parsed);
     }
 }
