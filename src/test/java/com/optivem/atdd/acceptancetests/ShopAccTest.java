@@ -28,6 +28,9 @@ public class ShopAccTest {
 
     private WebClient webClient;
 
+    private ErpStubDriver erpStubDriver;
+    private ErpStubDsl erpStubDsl;
+
     @BeforeEach
     void setUp() {
         ChromeOptions options = new ChromeOptions();
@@ -36,6 +39,9 @@ public class ShopAccTest {
         baseUrl = "http://localhost:" + port;
 
         webClient = WebClient.create(erpUrl);
+
+        erpStubDriver = new ErpStubDriver(webClient);
+        erpStubDsl = new ErpStubDsl(erpStubDriver);
     }
 
     @AfterEach
@@ -45,16 +51,11 @@ public class ShopAccTest {
 
     @Test
     public void shouldCompletePurchaseSuccessfully() {
-        stubOut();
+        erpStubDsl.setupProduct("sku: 8", "price: 2.50");
 
         var shop = new ShopDsl(new UiDriver(seleniumDriver, baseUrl + "/shop"));
 
         shop.placeOrder("sku: 8", "quantity: 5");
         shop.assertConfirmation("message: Success! Total price is $12.50");
-    }
-
-    private void stubOut() {
-        var erpStubDriver = new ErpStubDriver(webClient);
-        erpStubDriver.setupProduct("8", "2.50");
     }
 }

@@ -3,6 +3,8 @@ package com.optivem.atdd.acceptancetests;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.math.BigDecimal;
+
 public class ErpStubDriver extends BaseErpDriver {
 
 //    private final WireMock erpWireMockStub;
@@ -25,8 +27,10 @@ public class ErpStubDriver extends BaseErpDriver {
         super(webClient);
     }
 
-    public void setupProduct(String sku, String price) {
+    public void setupProduct(String sku, BigDecimal price) {
         // TODO: VJ: Use variables
+
+        var priceString = price.toString();
 
         String stubJson = String.format("""
         {
@@ -44,7 +48,7 @@ public class ErpStubDriver extends BaseErpDriver {
             }
           }
         }
-        """, sku, price);
+        """, sku, priceString);
 
         webClient.post()
                 .uri("/__admin/mappings")
