@@ -5,10 +5,12 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.*;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.test.context.ActiveProfiles;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ActiveProfiles("e2e")
 class ShopE2ETestV2 {
 
     @LocalServerPort
