@@ -1,4 +1,4 @@
-package com.optivem.atdd.e2e.v3;
+package com.optivem.atdd.e2e.v3.shared;
 
 import java.util.Map;
 import java.util.Arrays;

@@ -1,5 +1,9 @@
 package com.optivem.atdd.acceptancetests;
 
+import com.optivem.atdd.acceptancetests.shared.ErpStubDriver;
+import com.optivem.atdd.acceptancetests.shared.ErpStubDsl;
+import com.optivem.atdd.acceptancetests.shared.ShopDsl;
+import com.optivem.atdd.acceptancetests.shared.UiDriver;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,7 +13,6 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.web.reactive.function.client.WebClient;
 

@@ -1,4 +1,4 @@
-package com.optivem.atdd.e2e.v2;
+package com.optivem.atdd.e2e.v2.shared;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.*;

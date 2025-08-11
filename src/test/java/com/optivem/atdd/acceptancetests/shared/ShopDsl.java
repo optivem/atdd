@@ -1,4 +1,4 @@
-package com.optivem.atdd.e2e.v3;
+package com.optivem.atdd.acceptancetests.shared;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -19,10 +19,15 @@ public class ShopDsl {
         driver.submitOrder();
     }
 
+    public void assertConfirmation() {
+        var message = driver.getConfirmationMessage();
+        assertThat(message).matches("Success! Total price is \\$\\d+(\\.\\d{2})?");
+    }
+
     public void assertConfirmation(String... args) {
-        var params = new Params(args);
+        var params = new com.optivem.atdd.e2e.v3.shared.Params(args);
         var message = driver.getConfirmationMessage();
         var expectedMessage = params.getString("message", "");
-        assertThat(message).matches(expectedMessage);
+        assertThat(message).isEqualTo(expectedMessage);
     }
 }

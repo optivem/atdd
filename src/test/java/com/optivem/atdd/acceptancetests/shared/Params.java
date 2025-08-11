@@ -1,4 +1,4 @@
-package com.optivem.atdd.acceptancetests;
+package com.optivem.atdd.acceptancetests.shared;
 
 import java.math.BigDecimal;
 import java.util.Arrays;

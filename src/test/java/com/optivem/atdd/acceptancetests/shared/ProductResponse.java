@@ -1,4 +1,4 @@
-package com.optivem.atdd.acceptancetests;
+package com.optivem.atdd.acceptancetests.shared;
 
 public class ProductResponse {
     private String sku;

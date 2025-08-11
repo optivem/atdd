@@ -1,4 +1,4 @@
-package com.optivem.atdd.acceptancetests;
+package com.optivem.atdd.acceptancetests.shared;
 
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;

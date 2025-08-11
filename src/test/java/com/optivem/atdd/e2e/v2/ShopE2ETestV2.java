@@ -1,5 +1,6 @@
 package com.optivem.atdd.e2e.v2;
 
+import com.optivem.atdd.e2e.v2.shared.ShopPage;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.*;

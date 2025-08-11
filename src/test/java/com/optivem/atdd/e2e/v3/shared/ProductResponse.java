@@ -1,4 +1,4 @@
-package com.optivem.atdd.e2e.v3;
+package com.optivem.atdd.e2e.v3.shared;
 
 public class ProductResponse {
     private String sku;
