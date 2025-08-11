@@ -6,16 +6,22 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.context.ActiveProfiles;
+import org.wiremock.spring.EnableWireMock;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("e2e")
+@EnableWireMock
 public class ShopAccTest {
 
     @LocalServerPort
     private int port;
+
+    @Value("${wiremock.server.baseUrl}")
+    private String wireMockUrl;
 
     private WebDriver seleniumDriver;
     private String baseUrl;
