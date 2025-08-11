@@ -2,6 +2,7 @@ package com.optivem.atdd.controller;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +13,9 @@ import java.net.http.HttpResponse;
 
 @Controller
 public class ShopController {
+
+    @Value("${shop.api.base-url}")
+    private String apiBaseUrl;
 
     @GetMapping("/shop")
     @ResponseBody
@@ -51,7 +55,7 @@ public class ShopController {
 
     private double fetchPriceFromApi(String sku) {
         try {
-            var url = "https://dummyjson.com" + "/products/" + sku;
+            var url = apiBaseUrl + "/products/" + sku;
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(url))
