@@ -54,32 +54,7 @@ public class ShopAccTest {
     }
 
     private void stubOut() {
-
-
-        String stubJson = """
-{
-  "request": {
-    "method": "GET",
-    "urlPath": "/products/8"
-  },
-  "response": {
-    "status": 200,
-    "headers": {
-      "Content-Type": "application/json"
-    },
-    "jsonBody": {
-      "price": 2.50
-    }
-  }
-}
-""";
-
-        webClient.post()
-                .uri("/__admin/mappings")
-                .contentType(MediaType.APPLICATION_JSON)
-                .bodyValue(stubJson)
-                .retrieve()
-                .bodyToMono(String.class)
-                .block();
+        var erpStubDriver = new ErpStubDriver(webClient);
+        erpStubDriver.setupProduct("8", "2.50");
     }
 }
