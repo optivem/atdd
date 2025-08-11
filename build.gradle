@@ -21,7 +21,6 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web:3.5.4'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test:3.5.4'
 	testImplementation 'org.springframework.boot:spring-boot-starter-webflux:3.5.4'
-	testImplementation 'org.wiremock.integrations:wiremock-spring-boot:3.10.0'
 	testImplementation 'org.seleniumhq.selenium:selenium-java:4.34.0'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
