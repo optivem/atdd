@@ -28,11 +28,11 @@ public class ErpStubDriver extends BaseErpDriver {
     public void setupProduct(String sku, String price) {
         // TODO: VJ: Use variables
 
-        String stubJson = """
+        String stubJson = String.format("""
         {
           "request": {
             "method": "GET",
-            "urlPath": "/products/8"
+            "urlPath": "/products/%s"
           },
           "response": {
             "status": 200,
@@ -40,11 +40,11 @@ public class ErpStubDriver extends BaseErpDriver {
               "Content-Type": "application/json"
             },
             "jsonBody": {
-              "price": 2.50
+              "price": %s
             }
           }
         }
-        """;
+        """, sku, price);
 
         webClient.post()
                 .uri("/__admin/mappings")
