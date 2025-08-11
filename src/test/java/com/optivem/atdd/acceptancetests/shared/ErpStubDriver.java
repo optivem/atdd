@@ -23,7 +23,7 @@ public class ErpStubDriver extends BaseErpDriver {
 //    }
 
 
-    protected ErpStubDriver(WebClient webClient) {
+    public ErpStubDriver(WebClient webClient) {
         super(webClient);
     }
 

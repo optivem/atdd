@@ -2,7 +2,7 @@ package com.optivem.atdd.acceptancetests.shared;
 
 import org.springframework.web.reactive.function.client.WebClient;
 
-public class BaseErpDriver {
+public class BaseErpDriver implements ErpDriver {
     protected final WebClient webClient;
 
     protected BaseErpDriver(WebClient webClient) {
