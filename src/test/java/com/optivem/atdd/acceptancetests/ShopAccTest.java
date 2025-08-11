@@ -12,6 +12,8 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.context.ActiveProfiles;
 import org.wiremock.spring.EnableWireMock;
 
+import static com.github.tomakehurst.wiremock.client.WireMock.*;
+
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("e2e")
 @EnableWireMock
@@ -49,12 +51,12 @@ public class ShopAccTest {
 
     @Test
     public void shouldCompletePurchaseSuccessfully() {
-//        erpWireMockStub.stubFor(get(urlPathEqualTo("/products"))
-//                .withQueryParam("sku", equalTo("APPLE1001"))
-//                .willReturn(aResponse()
-//                        .withStatus(200)
-//                        .withHeader("Content-Type", "application/json")
-//                        .withBody("{\"price\": 2.50}")));
+        stubFor(get(urlPathEqualTo("/products"))
+                .withQueryParam("sku", equalTo("APPLE1001"))
+                .willReturn(aResponse()
+                        .withStatus(200)
+                        .withHeader("Content-Type", "application/json")
+                        .withBody("{\"price\": 2.50}")));
 
         var shop = new ShopDsl(new UiDriver(seleniumDriver, baseUrl + "/shop"));
 
