@@ -33,8 +33,7 @@ public class ShopController {
     @PostMapping("/shop")
     @ResponseBody
     public String placeOrder(@RequestParam String sku, @RequestParam int quantity) {
-        // double price = 2.50; // TODO: VJ: Remove: Hardcoded for APPLE1001
-        double price = fetchPriceFromApi();
+        double price = fetchPriceFromApi(sku);
         double total = price * quantity;
         return """
             <html>
@@ -50,11 +49,11 @@ public class ShopController {
             """.formatted(sku, quantity, total);
     }
 
-    private double fetchPriceFromApi() {
+    private double fetchPriceFromApi(String sku) {
         try {
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create("https://dummyjson.com/products/1"))
+                    .uri(URI.create("https://dummyjson.com/products/" + sku))
                     .build();
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             ObjectMapper mapper = new ObjectMapper();
