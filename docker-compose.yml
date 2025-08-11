@@ -1,0 +1,11 @@
+services:
+  wiremock:
+    image: wiremock/wiremock:3.5.2
+    ports:
+      - "8089:8080"
+#    volumes:
+    # Uncomment and set your mappings folder if you want to use custom stubs
+    # - ./wiremock/mappings:/home/wiremock/mappings
+    # - ./wiremock/__files:/home/wiremock/__files
+    environment:
+      - WIREMOCK_OPTIONS=--verbose
