@@ -27,6 +27,8 @@ dependencies {
 	testImplementation 'org.projectlombok:lombok:1.18.38'
 	annotationProcessor 'org.projectlombok:lombok:1.18.38'
 	testAnnotationProcessor 'org.projectlombok:lombok:1.18.38'
+
+//	testImplementation "org.wiremock:wiremock:3.13.1"
 }
 
 tasks.named('test') {

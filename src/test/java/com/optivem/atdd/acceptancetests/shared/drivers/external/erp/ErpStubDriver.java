@@ -4,7 +4,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
 
 public class ErpStubDriver extends BaseErpDriver {
-
+//
 //    private final WireMock erpWireMockStub;
 //
 //    public ErpStubDriver(WireMock erpWireMockStub) {
@@ -12,8 +12,8 @@ public class ErpStubDriver extends BaseErpDriver {
 //    }
 //
 //    public void setupProduct(String sku, String price) {
-//        erpWireMockStub.stubFor(get(urlPathEqualTo("/products"))
-//                .withQueryParam("sku", equalTo(sku))
+//        var url = "/products/" + sku;
+//        erpWireMockStub.stubFor(get(urlPathEqualTo(url))
 //                .willReturn(aResponse()
 //                        .withStatus(200)
 //                        .withHeader("Content-Type", "application/json")
