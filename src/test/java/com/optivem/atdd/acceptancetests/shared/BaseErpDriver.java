@@ -10,10 +10,10 @@ public class BaseErpDriver implements ErpDriver {
     }
 
     public ProductResponse getProduct(String sku) {
+        var path = "/products/" + sku;
         return webClient.get()
                 .uri(uriBuilder -> uriBuilder
-                        .path("/products")
-                        .queryParam("sku", sku)
+                        .path(path)
                         .build())
                 .retrieve()
                 .bodyToMono(ProductResponse.class)

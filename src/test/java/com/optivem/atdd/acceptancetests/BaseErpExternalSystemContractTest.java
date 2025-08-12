@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public abstract class BaseErpExternalSystemContractTest {
 
     private String erpUrl;
@@ -30,6 +32,8 @@ public abstract class BaseErpExternalSystemContractTest {
         // setupProduct("APPLE1001", 2.50);
 
         var response = erpDriver.getProduct("8");
+
+        assertThat(response.getPrice()).isPositive();
 
         // assertThat(response.getPrice()).isEqualTo(2.50);
     }
