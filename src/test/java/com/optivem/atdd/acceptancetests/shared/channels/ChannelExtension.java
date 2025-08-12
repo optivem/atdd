@@ -1,24 +1,27 @@
 package com.optivem.atdd.acceptancetests.shared.channels;
 
-import org.junit.jupiter.api.extension.*;
+import org.junit.jupiter.api.extension.ExtensionContext;
+import org.junit.jupiter.api.extension.TestTemplateInvocationContext;
+import org.junit.jupiter.api.extension.TestTemplateInvocationContextProvider;
 
 import java.lang.reflect.Method;
+import java.util.stream.Stream;
 
-public class ChannelExtension implements BeforeEachCallback, AfterEachCallback {
+public class ChannelExtension implements TestTemplateInvocationContextProvider {
 
     @Override
-    public void beforeEach(ExtensionContext context) {
-        Method testMethod = context.getRequiredTestMethod();
-        Channel channel = testMethod.getAnnotation(Channel.class);
-        if (channel != null && channel.value().length > 0) {
-            ChannelContext.set(channel.value()[0]); // Set the first channel
-        } else {
-            ChannelContext.clear();
-        }
+    public boolean supportsTestTemplate(ExtensionContext context) {
+        return context.getTestMethod()
+                .map(method -> method.isAnnotationPresent(Channel.class))
+                .orElse(false);
     }
 
     @Override
-    public void afterEach(ExtensionContext context) {
-        ChannelContext.clear();
+    public Stream<TestTemplateInvocationContext> provideTestTemplateInvocationContexts(ExtensionContext context) {
+        Method testMethod = context.getTestMethod().orElseThrow();
+        Channel channelAnnotation = testMethod.getAnnotation(Channel.class);
+
+        return Stream.of(channelAnnotation.value())
+                .map(channel -> new ChannelInvocationContext(channel));
     }
 }

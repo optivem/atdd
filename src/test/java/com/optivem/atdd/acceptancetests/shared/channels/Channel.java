@@ -1,10 +1,11 @@
 package com.optivem.atdd.acceptancetests.shared.channels;
 
+import org.junit.jupiter.api.extension.ExtendWith;
 import java.lang.annotation.*;
 
-@Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
+@ExtendWith(ChannelExtension.class)
 public @interface Channel {
     ChannelType[] value();
 }
-

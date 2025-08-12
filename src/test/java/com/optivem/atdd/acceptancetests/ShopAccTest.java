@@ -13,6 +13,7 @@ import com.optivem.atdd.acceptancetests.shared.drivers.system.SystemUiDriver;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestTemplate;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -68,7 +69,7 @@ public class ShopAccTest {
         seleniumDriver.quit();
     }
 
-    @Test
+    @TestTemplate
     @Channel({ChannelType.UI, ChannelType.API})
     public void shouldCompletePurchaseSuccessfully() {
         erpStub.setupProduct("sku: ABC1001", "price: 2.50");
