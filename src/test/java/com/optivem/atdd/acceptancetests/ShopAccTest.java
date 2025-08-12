@@ -58,7 +58,7 @@ public class ShopAccTest {
         erpStub = new ErpStubDsl(erpStubDriver);
 
         var uiDriver = new SystemUiDriver(seleniumDriver, baseUrl + "/shop");
-        var apiDriver = new SystemApiDriver();
+        var apiDriver = new SystemApiDriver(baseUrl);
         var systemDriverContext = new SystemDriverContext(uiDriver, apiDriver);
 
         shop = new ShopDsl(systemDriverContext);
