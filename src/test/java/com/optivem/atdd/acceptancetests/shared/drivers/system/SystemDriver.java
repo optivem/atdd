@@ -4,13 +4,13 @@ import org.openqa.selenium.By;
 
 public interface SystemDriver {
 
-    public void load();
+    void load();
 
-    public void setSku(String sku);
+    void setSku(String sku);
 
-    public void setQuantity(String quantity);
+    void setQuantity(String quantity);
 
-    public void submitOrder();
+    void submitOrder();
 
-    public void assertTotalPriceEquals(String expectedTotalPrice);
+    void assertTotalPriceEquals(String expectedTotalPrice);
 }
