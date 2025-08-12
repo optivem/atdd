@@ -22,12 +22,16 @@ public class ShopE2ETestV3 {
     private WebDriver seleniumDriver;
     private String baseUrl;
 
+    private ShopDsl shop;
+
     @BeforeEach
     void setUp() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless=new");
         seleniumDriver = new ChromeDriver(options);
         baseUrl = "http://localhost:" + port;
+
+        shop = new ShopDsl(new UiDriver(seleniumDriver, baseUrl + "/shop"));
     }
 
     @AfterEach
@@ -37,8 +41,6 @@ public class ShopE2ETestV3 {
 
     @Test
     public void shouldCompletePurchaseSuccessfully() {
-        var shop = new ShopDsl(new UiDriver(seleniumDriver, baseUrl + "/shop"));
-
         shop.placeOrder("sku: 8", "quantity: 5");
         shop.assertConfirmation("message: Success! Total Price is \\$\\d+(\\.\\d{2})?");
     }
