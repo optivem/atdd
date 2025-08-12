@@ -39,11 +39,11 @@ public class UiDriver {
     }
 
     public void assertTotalPriceIsPositive() {
-        WebElement confirmationElement = wait.until(
+        var confirmationElement = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[role='alert']"))
         );
 
-        String confirmation = confirmationElement.getText();
+        var confirmation = confirmationElement.getText();
 
         assertThat(confirmation).matches("Success! Total Price is \\$\\d+(\\.\\d{2})?");
     }
