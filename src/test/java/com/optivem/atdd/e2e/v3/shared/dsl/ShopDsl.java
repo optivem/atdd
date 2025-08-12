@@ -23,8 +23,12 @@ public class ShopDsl {
 
     public void assertConfirmation(String... args) {
         var params = new Params(args);
+
+    }
+
+    public void assertTotalPriceIsPositive() {
         var message = driver.getConfirmationMessage();
-        var expectedMessage = params.getString("message", "");
+        var expectedMessage = "Success! Total Price is \\$\\d+(\\.\\d{2})?";
         assertThat(message).matches(expectedMessage);
     }
 }

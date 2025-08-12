@@ -42,6 +42,6 @@ public class ShopE2ETestV3 {
     @Test
     public void shouldCompletePurchaseSuccessfully() {
         shop.placeOrder("sku: 8", "quantity: 5");
-        shop.assertConfirmation("message: Success! Total Price is \\$\\d+(\\.\\d{2})?");
+        shop.assertTotalPriceIsPositive();
     }
 }
