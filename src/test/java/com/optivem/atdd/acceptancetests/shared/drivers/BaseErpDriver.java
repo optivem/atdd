@@ -1,4 +1,4 @@
-package com.optivem.atdd.acceptancetests.shared;
+package com.optivem.atdd.acceptancetests.shared.drivers;
 
 import org.springframework.web.reactive.function.client.WebClient;
 

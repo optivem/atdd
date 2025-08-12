@@ -1,4 +1,4 @@
-package com.optivem.atdd.acceptancetests.shared;
+package com.optivem.atdd.acceptancetests.shared.drivers;
 
 public class ProductResponse {
     private String sku;

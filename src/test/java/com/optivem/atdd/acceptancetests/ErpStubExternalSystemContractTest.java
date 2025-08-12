@@ -1,7 +1,7 @@
 package com.optivem.atdd.acceptancetests;
 
-import com.optivem.atdd.acceptancetests.shared.ErpDriver;
-import com.optivem.atdd.acceptancetests.shared.ErpStubDriver;
+import com.optivem.atdd.acceptancetests.shared.drivers.ErpDriver;
+import com.optivem.atdd.acceptancetests.shared.drivers.ErpStubDriver;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;

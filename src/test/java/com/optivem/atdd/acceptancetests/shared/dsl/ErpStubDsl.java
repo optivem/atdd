@@ -1,4 +1,6 @@
-package com.optivem.atdd.acceptancetests.shared;
+package com.optivem.atdd.acceptancetests.shared.dsl;
+
+import com.optivem.atdd.acceptancetests.shared.drivers.ErpStubDriver;
 
 public class ErpStubDsl {
     private final ErpStubDriver erpStubDriver;

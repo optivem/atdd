@@ -1,9 +1,7 @@
-package com.optivem.atdd.acceptancetests.shared;
+package com.optivem.atdd.acceptancetests.shared.drivers;
 
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
-
-import java.math.BigDecimal;
 
 public class ErpStubDriver extends BaseErpDriver {
 

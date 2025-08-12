@@ -1,4 +1,4 @@
-package com.optivem.atdd.acceptancetests.shared;
+package com.optivem.atdd.acceptancetests.shared.drivers;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
