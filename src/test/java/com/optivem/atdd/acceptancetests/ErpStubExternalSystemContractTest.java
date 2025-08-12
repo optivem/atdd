@@ -2,10 +2,13 @@ package com.optivem.atdd.acceptancetests;
 
 import com.optivem.atdd.acceptancetests.shared.ErpDriver;
 import com.optivem.atdd.acceptancetests.shared.ErpStubDriver;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.web.reactive.function.client.WebClient;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("acc")
@@ -25,7 +28,16 @@ public class ErpStubExternalSystemContractTest extends BaseErpExternalSystemCont
 
     @Override
     protected void setupProduct(String sku, String price) {
-        ErpStubDriver erpStubDriver = (ErpStubDriver) getErpDriver();
+        ErpStubDriver erpStubDriver = (ErpStubDriver) erpDriver;
         erpStubDriver.setupProduct(sku, price);
+    }
+
+    @Test
+    void shouldFetchCorrectProductPrice() {
+        setupProduct("8", "2.50");
+
+        var response = erpDriver.getProduct("8");
+
+        assertThat(response.getPrice()).isEqualTo(2.50);
     }
 }

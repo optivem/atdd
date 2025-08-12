@@ -13,15 +13,11 @@ public abstract class BaseErpExternalSystemContractTest {
 
     private String erpUrl;
 
-    private ErpDriver erpDriver;
+    protected ErpDriver erpDriver;
 
     protected abstract String getErpUrl();
 
     protected abstract ErpDriver createErpDriver(WebClient webClient);
-
-    protected ErpDriver getErpDriver() {
-        return erpDriver;
-    }
 
     @BeforeEach
     void setUp() {
