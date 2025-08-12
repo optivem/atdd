@@ -1,9 +1,9 @@
 package com.optivem.atdd.acceptancetests;
 
-import com.optivem.atdd.acceptancetests.shared.drivers.ErpStubDriver;
-import com.optivem.atdd.acceptancetests.shared.dsl.ErpStubDsl;
-import com.optivem.atdd.acceptancetests.shared.dsl.ShopDsl;
-import com.optivem.atdd.acceptancetests.shared.drivers.UiDriver;
+import com.optivem.atdd.acceptancetests.shared.drivers.external.erp.ErpStubDriver;
+import com.optivem.atdd.acceptancetests.shared.dsl.external.erp.ErpStubDsl;
+import com.optivem.atdd.acceptancetests.shared.dsl.system.ShopDsl;
+import com.optivem.atdd.acceptancetests.shared.drivers.system.UiDriver;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

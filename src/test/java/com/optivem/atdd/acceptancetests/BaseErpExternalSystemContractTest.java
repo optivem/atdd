@@ -1,6 +1,6 @@
 package com.optivem.atdd.acceptancetests;
 
-import com.optivem.atdd.acceptancetests.shared.drivers.ErpDriver;
+import com.optivem.atdd.acceptancetests.shared.drivers.external.erp.ErpDriver;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.web.reactive.function.client.WebClient;

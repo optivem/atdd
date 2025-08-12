@@ -1,7 +1,7 @@
 package com.optivem.atdd.acceptancetests;
 
-import com.optivem.atdd.acceptancetests.shared.drivers.ErpDriver;
-import com.optivem.atdd.acceptancetests.shared.drivers.RealErpDriver;
+import com.optivem.atdd.acceptancetests.shared.drivers.external.erp.ErpDriver;
+import com.optivem.atdd.acceptancetests.shared.drivers.external.erp.RealErpDriver;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;

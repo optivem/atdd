@@ -1,4 +1,4 @@
-package com.optivem.atdd.acceptancetests.shared.drivers;
+package com.optivem.atdd.acceptancetests.shared.drivers.external.erp;
 
 import org.springframework.web.reactive.function.client.WebClient;
 

@@ -1,6 +1,7 @@
-package com.optivem.atdd.acceptancetests.shared.dsl;
+package com.optivem.atdd.acceptancetests.shared.dsl.system;
 
-import com.optivem.atdd.acceptancetests.shared.drivers.UiDriver;
+import com.optivem.atdd.acceptancetests.shared.drivers.system.UiDriver;
+import com.optivem.atdd.acceptancetests.shared.dsl.util.Params;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
