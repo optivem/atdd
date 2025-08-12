@@ -27,10 +27,8 @@ public class ErpStubDriver extends BaseErpDriver {
         super(webClient);
     }
 
-    public void setupProduct(String sku, BigDecimal price) {
+    public void setupProduct(String sku, String price) {
         // TODO: VJ: Use variables
-
-        var priceString = price.toString();
 
         String stubJson = String.format("""
         {
@@ -48,7 +46,7 @@ public class ErpStubDriver extends BaseErpDriver {
             }
           }
         }
-        """, sku, priceString);
+        """, sku, price);
 
         webClient.post()
                 .uri("/__admin/mappings")

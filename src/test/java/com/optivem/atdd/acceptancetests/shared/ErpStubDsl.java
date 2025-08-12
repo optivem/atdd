@@ -10,7 +10,7 @@ public class ErpStubDsl {
     public void setupProduct(String... args) {
         var params = new Params(args);
         var sku = params.getString("sku", "DEFAULT_SKU");
-        var price = params.getDecimal("price", "0");
+        var price = params.getString("price", "0");
         erpStubDriver.setupProduct(sku, price);
     }
 }

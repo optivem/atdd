@@ -19,6 +19,10 @@ public abstract class BaseErpExternalSystemContractTest {
 
     protected abstract ErpDriver createErpDriver(WebClient webClient);
 
+    protected ErpDriver getErpDriver() {
+        return erpDriver;
+    }
+
     @BeforeEach
     void setUp() {
         this.erpUrl = getErpUrl();
@@ -28,13 +32,16 @@ public abstract class BaseErpExternalSystemContractTest {
 
     @Test
     void shouldFetchProductDetails() {
-        // Abstract method, implemented by Stub & Real External System Driver
-        // setupProduct("APPLE1001", 2.50);
+        setupProduct("8", "2.50");
 
         var response = erpDriver.getProduct("8");
 
         assertThat(response.getPrice()).isPositive();
 
         // assertThat(response.getPrice()).isEqualTo(2.50);
+    }
+
+    protected void setupProduct(String sku, String price) {
+        // Empty implementation for subclasses to override if needed
     }
 }
