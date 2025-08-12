@@ -8,6 +8,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class UiDriver {
     private final WebDriver driver;
     private final String shopUrl;
@@ -36,10 +38,13 @@ public class UiDriver {
         driver.findElement(By.cssSelector("[aria-label='Place Order']")).click();
     }
 
-    public String getConfirmationMessage() {
-        WebElement confirmation = wait.until(
+    public void assertTotalPriceIsPositive() {
+        WebElement confirmationElement = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[role='alert']"))
         );
-        return confirmation.getText();
+
+        String confirmation = confirmationElement.getText();
+
+        assertThat(confirmation).matches("Success! Total Price is \\$\\d+(\\.\\d{2})?");
     }
 }
