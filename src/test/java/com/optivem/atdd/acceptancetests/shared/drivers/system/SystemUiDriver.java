@@ -2,7 +2,6 @@ package com.optivem.atdd.acceptancetests.shared.drivers.system;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -11,12 +10,12 @@ import java.util.regex.Pattern;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class UiDriver implements SystemDriver {
+public class SystemUiDriver implements SystemDriver {
     private final WebDriver driver;
     private final String shopUrl;
     private final WebDriverWait wait;
 
-    public UiDriver(WebDriver driver, String shopUrl) {
+    public SystemUiDriver(WebDriver driver, String shopUrl) {
         this.driver = driver;
         this.shopUrl = shopUrl;
 

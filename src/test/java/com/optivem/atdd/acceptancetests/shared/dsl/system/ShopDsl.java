@@ -1,14 +1,14 @@
 package com.optivem.atdd.acceptancetests.shared.dsl.system;
 
-import com.optivem.atdd.acceptancetests.shared.drivers.system.UiDriver;
+import com.optivem.atdd.acceptancetests.shared.drivers.system.SystemUiDriver;
 import com.optivem.atdd.acceptancetests.shared.dsl.util.Params;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ShopDsl {
-    private final UiDriver driver;
+    private final SystemUiDriver driver;
 
-    public ShopDsl(UiDriver driver) {
+    public ShopDsl(SystemUiDriver driver) {
         this.driver = driver;
     }
 

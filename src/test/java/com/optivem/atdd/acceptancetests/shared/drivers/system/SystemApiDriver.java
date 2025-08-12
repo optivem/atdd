@@ -1,6 +1,6 @@
 package com.optivem.atdd.acceptancetests.shared.drivers.system;
 
-public class ApiDriver implements SystemDriver {
+public class SystemApiDriver implements SystemDriver {
     @Override
     public void load() {
 

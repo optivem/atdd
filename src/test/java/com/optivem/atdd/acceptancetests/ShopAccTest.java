@@ -7,7 +7,7 @@ import com.optivem.atdd.acceptancetests.shared.channels.ChannelType;
 import com.optivem.atdd.acceptancetests.shared.drivers.external.erp.ErpStubDriver;
 import com.optivem.atdd.acceptancetests.shared.dsl.external.erp.ErpStubDsl;
 import com.optivem.atdd.acceptancetests.shared.dsl.system.ShopDsl;
-import com.optivem.atdd.acceptancetests.shared.drivers.system.UiDriver;
+import com.optivem.atdd.acceptancetests.shared.drivers.system.SystemUiDriver;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -53,7 +53,7 @@ public class ShopAccTest {
 
         erpStubDriver = new ErpStubDriver(webClient);
         erpStub = new ErpStubDsl(erpStubDriver);
-        shop = new ShopDsl(new UiDriver(seleniumDriver, baseUrl + "/shop"));
+        shop = new ShopDsl(new SystemUiDriver(seleniumDriver, baseUrl + "/shop"));
     }
 
     @AfterEach
