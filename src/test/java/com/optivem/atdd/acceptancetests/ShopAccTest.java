@@ -71,13 +71,6 @@ public class ShopAccTest {
     @Test
     @Channel({ChannelType.UI, ChannelType.API})
     public void shouldCompletePurchaseSuccessfully() {
-        // TODO: VJ: Implement
-        var currentChannel = ChannelContext.get();
-        if(currentChannel == null) {
-            throw new RuntimeException("Current channel is null!!!");
-        }
-
-
         erpStub.setupProduct("sku: ABC1001", "price: 2.50");
         shop.placeOrder("sku: ABC1001", "quantity: 5");
         shop.assertConfirmation("totalPrice: 12.50");
