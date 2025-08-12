@@ -8,17 +8,7 @@ public class SystemApiDriver implements SystemDriver {
     }
 
     @Override
-    public void setSku(String sku) {
-
-    }
-
-    @Override
-    public void setQuantity(String quantity) {
-
-    }
-
-    @Override
-    public void submitOrder() {
+    public void submitOrder(String sku, String quantity) {
 
     }
 

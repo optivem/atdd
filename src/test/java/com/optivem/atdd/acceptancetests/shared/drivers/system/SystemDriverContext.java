@@ -13,7 +13,7 @@ public class SystemDriverContext implements SystemDriver {
     }
 
     private SystemDriver getActiveDriver() {
-        ChannelType channel = ChannelContext.get();
+        var channel = ChannelContext.get();
         if (channel == ChannelType.UI) {
             return uiDriver;
         } else if (channel == ChannelType.API) {
@@ -28,18 +28,8 @@ public class SystemDriverContext implements SystemDriver {
     }
 
     @Override
-    public void setSku(String sku) {
-        getActiveDriver().setSku(sku);
-    }
-
-    @Override
-    public void setQuantity(String quantity) {
-        getActiveDriver().setQuantity(quantity);
-    }
-
-    @Override
-    public void submitOrder() {
-        getActiveDriver().submitOrder();
+    public void submitOrder(String sku, String quantity) {
+        getActiveDriver().submitOrder(sku, quantity);
     }
 
     @Override

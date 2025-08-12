@@ -26,15 +26,9 @@ public class SystemUiDriver implements SystemDriver {
         driver.get(shopUrl);
     }
 
-    public void setSku(String sku) {
+    public void submitOrder(String sku, String quantity) {
         driver.findElement(By.cssSelector("[aria-label='SKU']")).sendKeys(sku);
-    }
-
-    public void setQuantity(String quantity) {
         driver.findElement(By.cssSelector("[aria-label='Quantity']")).sendKeys(quantity);
-    }
-
-    public void submitOrder() {
         driver.findElement(By.cssSelector("[aria-label='Place Order']")).click();
     }
 

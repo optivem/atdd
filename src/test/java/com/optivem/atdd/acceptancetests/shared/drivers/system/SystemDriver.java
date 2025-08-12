@@ -6,11 +6,7 @@ public interface SystemDriver {
 
     void load();
 
-    void setSku(String sku);
-
-    void setQuantity(String quantity);
-
-    void submitOrder();
+    void submitOrder(String sku, String quantity);
 
     void assertTotalPriceEquals(String expectedTotalPrice);
 }
