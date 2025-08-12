@@ -24,7 +24,7 @@ public class ShopDsl {
 
     public void assertConfirmation() {
         var message = driver.getConfirmationMessage();
-        assertThat(message).matches("Success! Total price is \\$\\d+(\\.\\d{2})?");
+        assertThat(message).matches("Success! Total Price is \\$\\d+(\\.\\d{2})?");
     }
 
     public void assertConfirmation(String... args) {

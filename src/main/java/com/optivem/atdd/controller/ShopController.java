@@ -47,7 +47,7 @@ public class ShopController {
                     <input name='quantity' aria-label='Quantity' value='%d' />
                     <button type='submit' aria-label='Place Order'>Place Order</button>
                 </form>
-                <div role='alert'>Success! Total price is $%.2f</div>
+                <div role='alert'>Success! Total Price is $%.2f</div>
             </body>
             </html>
             """.formatted(sku, quantity, total);

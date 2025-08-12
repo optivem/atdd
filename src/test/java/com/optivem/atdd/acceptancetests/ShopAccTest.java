@@ -60,6 +60,6 @@ public class ShopAccTest {
         erpStub.setupProduct("sku: 8", "price: 2.50");
 
         shop.placeOrder("sku: 8", "quantity: 5");
-        shop.assertConfirmation("message: Success! Total price is $12.50");
+        shop.assertConfirmation("message: Success! Total Price is $12.50");
     }
 }

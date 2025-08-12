@@ -43,7 +43,6 @@ class ShopE2ETest {
         // Act
         seleniumDriver.get(baseUrl + "/shop");
 
-        // TODO: VJ: Add later
         var skuInput = seleniumDriver.findElement(By.cssSelector("[aria-label='SKU']"));
         skuInput.sendKeys("8");
 
@@ -53,17 +52,11 @@ class ShopE2ETest {
         var placeOrderButton = seleniumDriver.findElement(By.cssSelector("[aria-label='Place Order']"));
         placeOrderButton.click();
 
-        // Assert
-        // var confirmationMessage = seleniumDriver.findElement(By.cssSelector("[role='alert']"));
-
         var wait = new WebDriverWait(seleniumDriver, Duration.ofSeconds(10));
         var confirmationMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[role='alert']")));
 
         var text = confirmationMessage.getText();
 
-        assertThat(text).matches("Success! Total price is \\$\\d+(\\.\\d{2})?");
-
-//        assertThat(text)
-//                .isEqualTo("Success! Total price is $12.50");
+        assertThat(text).matches("Success! Total Price is \\$\\d+(\\.\\d{2})?");
     }
 }

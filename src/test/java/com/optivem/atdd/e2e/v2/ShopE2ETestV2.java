@@ -42,6 +42,6 @@ class ShopE2ETestV2 {
         shopPage.placeOrder();
 
         String text = shopPage.getConfirmationMessage();
-        assertThat(text).matches("Success! Total price is \\$\\d+(\\.\\d{2})?");
+        assertThat(text).matches("Success! Total Price is \\$\\d+(\\.\\d{2})?");
     }
 }
