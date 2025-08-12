@@ -2,6 +2,7 @@ package com.optivem.atdd.acceptancetests;
 
 import com.optivem.atdd.acceptancetests.shared.channels.Channel;
 import com.optivem.atdd.acceptancetests.shared.channels.ChannelContext;
+import com.optivem.atdd.acceptancetests.shared.channels.ChannelExtension;
 import com.optivem.atdd.acceptancetests.shared.channels.ChannelType;
 import com.optivem.atdd.acceptancetests.shared.drivers.external.erp.ErpStubDriver;
 import com.optivem.atdd.acceptancetests.shared.dsl.external.erp.ErpStubDsl;
@@ -10,6 +11,7 @@ import com.optivem.atdd.acceptancetests.shared.drivers.system.UiDriver;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -21,6 +23,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("acc")
+@ExtendWith(ChannelExtension.class)
 public class ShopAccTest {
 
     @LocalServerPort
@@ -63,6 +66,10 @@ public class ShopAccTest {
     public void shouldCompletePurchaseSuccessfully() {
         // TODO: VJ: Implement
         var currentChannel = ChannelContext.get();
+        if(currentChannel == null) {
+            throw new RuntimeException("Current channel is null!!!");
+        }
+
 
         erpStub.setupProduct("sku: ABC1001", "price: 2.50");
         shop.placeOrder("sku: ABC1001", "quantity: 5");
