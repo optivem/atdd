@@ -29,13 +29,12 @@ public abstract class BaseErpExternalSystemContractTest {
         setupProduct("ABC1001", "2.50");
 
         var response = erpDriver.getProduct("ABC1001");
-
         assertThat(response).isNotNull();
+
         var priceString = response.getPrice();
         assertThat(priceString).isNotNull();
 
         var price = Double.parseDouble(priceString);
-
         assertThat(price).isPositive();
     }
 
