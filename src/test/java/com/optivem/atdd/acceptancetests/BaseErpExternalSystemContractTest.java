@@ -30,9 +30,14 @@ public abstract class BaseErpExternalSystemContractTest {
 
         var response = erpDriver.getProduct("8");
 
-        assertThat(response.getPrice()).isPositive();
+        assertThat(response).isNotNull();
+        var priceString = response.getPrice();
+        assertThat(priceString).isNotNull();
 
-        // assertThat(response.getPrice()).isEqualTo(2.50);
+        var price = Double.parseDouble(priceString);
+
+        assertThat(price).isPositive();
+
     }
 
     protected void setupProduct(String sku, String price) {

@@ -28,9 +28,8 @@ public class UiDriver {
         driver.findElement(By.cssSelector("[aria-label='SKU']")).sendKeys(sku);
     }
 
-    public void setQuantity(int quantity) {
-        var quantityStr = String.valueOf(quantity);
-        driver.findElement(By.cssSelector("[aria-label='Quantity']")).sendKeys(quantityStr);
+    public void setQuantity(String quantity) {
+        driver.findElement(By.cssSelector("[aria-label='Quantity']")).sendKeys(quantity);
     }
 
     public void submitOrder() {

@@ -2,9 +2,8 @@ package com.optivem.atdd.acceptancetests.shared.drivers.external.erp;
 
 public class ProductResponse {
     private String sku;
-    private double price;
+    private String price;
 
-    // Getters and setters
     public String getSku() {
         return sku;
     }
@@ -13,11 +12,11 @@ public class ProductResponse {
         this.sku = sku;
     }
 
-    public double getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 }

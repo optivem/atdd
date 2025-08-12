@@ -17,15 +17,4 @@ public class Params {
     public String getString(String key, String defaultValue) {
         return paramMap.getOrDefault(key, defaultValue);
     }
-
-    public int getInteger(String key, String defaultValue) {
-        var value = paramMap.getOrDefault(key, defaultValue);
-        return Integer.parseInt(value);
-    }
-
-    public BigDecimal getDecimal(String key, String defaultValue) {
-        var value = paramMap.getOrDefault(key, defaultValue);
-        var parsed = Double.parseDouble(value);
-        return BigDecimal.valueOf(parsed);
-    }
 }
