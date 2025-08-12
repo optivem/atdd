@@ -5,7 +5,7 @@ spring:
     activate:
       on-profile: prod
 erp:
-  url: https://dummyjson.com
+  url: https://optivem.free.beeceptor.com/sap/api
 
 ---
 spring:
@@ -13,7 +13,7 @@ spring:
     activate:
       on-profile: qa
 erp:
-  url: https://dummyjson.com
+  url: https://optivem.free.beeceptor.com/sap-test/api
 
 ---
 spring:
@@ -21,7 +21,7 @@ spring:
     activate:
       on-profile: e2e
 erp:
-  url: https://dummyjson.com
+  url: https://optivem.free.beeceptor.com/sap-test/api
 
 ---
 spring:

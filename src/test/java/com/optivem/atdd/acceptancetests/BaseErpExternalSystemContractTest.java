@@ -37,7 +37,6 @@ public abstract class BaseErpExternalSystemContractTest {
         var price = Double.parseDouble(priceString);
 
         assertThat(price).isPositive();
-
     }
 
     protected void setupProduct(String sku, String price) {

@@ -38,6 +38,6 @@ public class ErpStubExternalSystemContractTest extends BaseErpExternalSystemCont
 
         var response = erpDriver.getProduct("8");
 
-        assertThat(response.getPrice()).isEqualTo(2.50);
+        assertThat(response.getPrice()).isEqualTo("2.50");
     }
 }
