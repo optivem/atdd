@@ -2,7 +2,6 @@ package com.optivem.atdd.e2e.v3.shared.drivers;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -12,18 +11,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class UiDriver {
     private final WebDriver driver;
-    private final String shopUrl;
+    private final String baseUrl;
     private final WebDriverWait wait;
 
-    public UiDriver(WebDriver driver, String shopUrl) {
+    public UiDriver(WebDriver driver, String baseUrl) {
         this.driver = driver;
-        this.shopUrl = shopUrl;
+        this.baseUrl = baseUrl;
 
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
     public void load() {
-        driver.get(shopUrl);
+        driver.get(baseUrl);
     }
 
     public void setSku(String sku) {
