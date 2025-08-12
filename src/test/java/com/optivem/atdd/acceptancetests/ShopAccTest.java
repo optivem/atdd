@@ -1,5 +1,8 @@
 package com.optivem.atdd.acceptancetests;
 
+import com.optivem.atdd.acceptancetests.shared.channels.Channel;
+import com.optivem.atdd.acceptancetests.shared.channels.ChannelContext;
+import com.optivem.atdd.acceptancetests.shared.channels.ChannelType;
 import com.optivem.atdd.acceptancetests.shared.drivers.external.erp.ErpStubDriver;
 import com.optivem.atdd.acceptancetests.shared.dsl.external.erp.ErpStubDsl;
 import com.optivem.atdd.acceptancetests.shared.dsl.system.ShopDsl;
@@ -56,7 +59,11 @@ public class ShopAccTest {
     }
 
     @Test
+    @Channel({ChannelType.UI, ChannelType.API})
     public void shouldCompletePurchaseSuccessfully() {
+        // TODO: VJ: Implement
+        var currentChannel = ChannelContext.get();
+
         erpStub.setupProduct("sku: ABC1001", "price: 2.50");
         shop.placeOrder("sku: ABC1001", "quantity: 5");
         shop.assertConfirmation("totalPrice: 12.50");
