@@ -5,6 +5,8 @@ import com.optivem.atdd.acceptancetests.shared.channels.ChannelContext;
 import com.optivem.atdd.acceptancetests.shared.channels.ChannelExtension;
 import com.optivem.atdd.acceptancetests.shared.channels.ChannelType;
 import com.optivem.atdd.acceptancetests.shared.drivers.external.erp.ErpStubDriver;
+import com.optivem.atdd.acceptancetests.shared.drivers.system.SystemApiDriver;
+import com.optivem.atdd.acceptancetests.shared.drivers.system.SystemDriverContext;
 import com.optivem.atdd.acceptancetests.shared.dsl.external.erp.ErpStubDsl;
 import com.optivem.atdd.acceptancetests.shared.dsl.system.ShopDsl;
 import com.optivem.atdd.acceptancetests.shared.drivers.system.SystemUiDriver;
@@ -53,7 +55,12 @@ public class ShopAccTest {
 
         erpStubDriver = new ErpStubDriver(webClient);
         erpStub = new ErpStubDsl(erpStubDriver);
-        shop = new ShopDsl(new SystemUiDriver(seleniumDriver, baseUrl + "/shop"));
+
+        var uiDriver = new SystemUiDriver(seleniumDriver, baseUrl + "/shop");
+        var apiDriver = new SystemApiDriver();
+        var systemDriverContext = new SystemDriverContext(uiDriver, apiDriver);
+
+        shop = new ShopDsl(systemDriverContext);
     }
 
     @AfterEach
