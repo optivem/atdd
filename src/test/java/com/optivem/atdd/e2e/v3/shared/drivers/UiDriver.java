@@ -1,4 +1,4 @@
-package com.optivem.atdd.e2e.v3.shared;
+package com.optivem.atdd.e2e.v3.shared.drivers;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

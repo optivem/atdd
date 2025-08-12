@@ -1,7 +1,7 @@
 package com.optivem.atdd.e2e.v3;
 
-import com.optivem.atdd.e2e.v3.shared.ShopDsl;
-import com.optivem.atdd.e2e.v3.shared.UiDriver;
+import com.optivem.atdd.e2e.v3.shared.dsl.ShopDsl;
+import com.optivem.atdd.e2e.v3.shared.drivers.UiDriver;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

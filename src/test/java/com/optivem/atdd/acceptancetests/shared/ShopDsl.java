@@ -25,7 +25,7 @@ public class ShopDsl {
     }
 
     public void assertConfirmation(String... args) {
-        var params = new com.optivem.atdd.e2e.v3.shared.Params(args);
+        var params = new com.optivem.atdd.e2e.v3.shared.dsl.Params(args);
         var message = driver.getConfirmationMessage();
         var expectedMessage = params.getString("message", "");
         assertThat(message).isEqualTo(expectedMessage);

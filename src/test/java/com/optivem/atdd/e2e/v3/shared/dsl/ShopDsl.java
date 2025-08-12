@@ -1,4 +1,6 @@
-package com.optivem.atdd.e2e.v3.shared;
+package com.optivem.atdd.e2e.v3.shared.dsl;
+
+import com.optivem.atdd.e2e.v3.shared.drivers.UiDriver;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
