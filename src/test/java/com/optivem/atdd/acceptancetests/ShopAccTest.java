@@ -59,6 +59,6 @@ public class ShopAccTest {
     public void shouldCompletePurchaseSuccessfully() {
         erpStub.setupProduct("sku: ABC1001", "price: 2.50");
         shop.placeOrder("sku: ABC1001", "quantity: 5");
-        shop.assertConfirmation("message: Success! Total Price is $12.50");
+        shop.assertConfirmation("totalPrice: 12.50");
     }
 }
