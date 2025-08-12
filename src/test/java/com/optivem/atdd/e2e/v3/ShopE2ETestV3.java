@@ -41,7 +41,7 @@ public class ShopE2ETestV3 {
 
     @Test
     public void shouldCompletePurchaseSuccessfully() {
-        shop.placeOrder("sku: 8", "quantity: 5");
+        shop.placeOrder("sku: ABC1001", "quantity: 5");
         shop.assertTotalPriceIsPositive();
     }
 }

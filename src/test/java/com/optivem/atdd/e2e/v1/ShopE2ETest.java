@@ -44,7 +44,7 @@ class ShopE2ETest {
         seleniumDriver.get(baseUrl + "/shop");
 
         var skuInput = seleniumDriver.findElement(By.cssSelector("[aria-label='SKU']"));
-        skuInput.sendKeys("8");
+        skuInput.sendKeys("ABC1001");
 
         var quantityInput = seleniumDriver.findElement(By.cssSelector("[aria-label='Quantity']"));
         quantityInput.sendKeys("5");

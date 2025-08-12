@@ -37,7 +37,7 @@ class ShopE2ETestV2 {
     void shouldCompletePurchaseSuccessfully() {
         ShopPage shopPage = new ShopPage(seleniumDriver);
         shopPage.open(baseUrl);
-        shopPage.enterSku("8");
+        shopPage.enterSku("ABC1001");
         shopPage.enterQuantity("5");
         shopPage.placeOrder();
 

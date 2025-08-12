@@ -34,9 +34,9 @@ public class ErpStubExternalSystemContractTest extends BaseErpExternalSystemCont
 
     @Test
     void shouldFetchCorrectProductPrice() {
-        setupProduct("8", "2.50");
+        setupProduct("ABC1001", "2.50");
 
-        var response = erpDriver.getProduct("8");
+        var response = erpDriver.getProduct("ABC1001");
 
         assertThat(response.getPrice()).isEqualTo("2.50");
     }

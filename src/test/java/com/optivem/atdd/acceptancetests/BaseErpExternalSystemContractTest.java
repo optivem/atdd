@@ -26,9 +26,9 @@ public abstract class BaseErpExternalSystemContractTest {
 
     @Test
     void shouldFetchProductDetails() {
-        setupProduct("8", "2.50");
+        setupProduct("ABC1001", "2.50");
 
-        var response = erpDriver.getProduct("8");
+        var response = erpDriver.getProduct("ABC1001");
 
         assertThat(response).isNotNull();
         var priceString = response.getPrice();
