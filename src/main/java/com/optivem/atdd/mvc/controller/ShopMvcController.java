@@ -1,15 +1,9 @@
 package com.optivem.atdd.mvc.controller;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.optivem.atdd.common.PriceCalculator;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 
 @Controller
 public class ShopMvcController {
@@ -37,8 +31,7 @@ public class ShopMvcController {
     @PostMapping("/shop")
     @ResponseBody
     public String placeOrder(@RequestParam String sku, @RequestParam int quantity) {
-        double price = fetchPriceFromApi(sku);
-        double total = price * quantity;
+        double totalPrice = PriceCalculator.calculatePrice(erpUrl, sku, quantity);
         return """
             <html>
             <body>
@@ -50,22 +43,8 @@ public class ShopMvcController {
                 <div role='alert'>Success! Total Price is $%.2f</div>
             </body>
             </html>
-            """.formatted(sku, quantity, total);
+            """.formatted(sku, quantity, totalPrice);
     }
 
-    private double fetchPriceFromApi(String sku) {
-        try {
-            var url = erpUrl + "/products/" + sku;
-            HttpClient client = HttpClient.newHttpClient();
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(url))
-                    .build();
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            ObjectMapper mapper = new ObjectMapper();
-            JsonNode node = mapper.readTree(response.body());
-            return node.get("price").asDouble();
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to fetch price", e);
-        }
-    }
+
 }
