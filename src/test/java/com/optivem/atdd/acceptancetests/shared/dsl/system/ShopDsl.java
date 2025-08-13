@@ -15,14 +15,14 @@ public class ShopDsl {
     public void placeOrder(String... args) {
         driver.load();
         var params = new DslParams(args);
-        var sku = params.getString("sku", "99");
-        var quantity = params.getString("quantity", "1");
+        var sku = params.getValue("sku", "99");
+        var quantity = params.getValue("quantity", "1");
         driver.submitOrder(sku, quantity);
     }
 
     public void confirmOrder(String... args) {
         var params = new DslParams(args);
-        var expectedPrice = params.getString("totalPrice", "");
+        var expectedPrice = params.getValue("totalPrice", "");
         driver.confirmTotalPriceEquals(expectedPrice);
     }
 }

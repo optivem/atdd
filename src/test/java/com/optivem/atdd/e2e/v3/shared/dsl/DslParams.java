@@ -13,7 +13,7 @@ public class DslParams {
             .collect(Collectors.toMap(a -> a[0].trim(), a -> a[1].trim()));
     }
 
-    public String getString(String key, String defaultValue) {
+    public String getValue(String key, String defaultValue) {
         return paramMap.getOrDefault(key, defaultValue);
     }
 }
