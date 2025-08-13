@@ -4,7 +4,6 @@ import com.optivem.atdd.acceptancetests.shared.channels.Channel;
 import com.optivem.atdd.acceptancetests.shared.channels.ChannelContext;
 import com.optivem.atdd.acceptancetests.shared.channels.ChannelExtension;
 import com.optivem.atdd.acceptancetests.shared.channels.ChannelType;
-import com.optivem.atdd.acceptancetests.shared.channels.parametrized.ChannelParameterizedTest;
 import com.optivem.atdd.acceptancetests.shared.drivers.external.erp.ErpStubDriver;
 import com.optivem.atdd.acceptancetests.shared.drivers.system.SystemApiDriver;
 import com.optivem.atdd.acceptancetests.shared.drivers.system.SystemDriver;
@@ -20,6 +19,7 @@ import java.util.stream.Stream;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.TestTemplate;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -132,6 +132,15 @@ public class ShopAccTest {
         shop.confirmOrder("totalPrice: " + totalPrice);
     }
 
+
+    @Disabled
+    @TestTemplate
+    @Channel({ChannelType.UI, ChannelType.API})
+    public void shouldCompletePurchaseSuccessfullyThisIsSomePlainTest() {
+        erpStub.setupProduct("sku: ABC", "price: 2.50");
+        shop.placeOrder("sku: ABC", "quantity: 5");
+        shop.confirmOrder("totalPrice: 12.50");
+    }
 
 }
 
