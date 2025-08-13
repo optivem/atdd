@@ -21,9 +21,12 @@ public class ChannelInvocationContext implements TestTemplateInvocationContext {
 
     @Override
     public String getDisplayName(int invocationIndex) {
-        String argsString = IntStream.range(0, arguments.length)
+        if (arguments.length == 0) {
+            return "Channel: " + channel;
+        }
+        String argsString = java.util.stream.IntStream.range(0, arguments.length)
             .mapToObj(i -> (paramNames.length > i ? paramNames[i] + "=" : "") + arguments[i])
-            .collect(Collectors.joining(", "));
+            .collect(java.util.stream.Collectors.joining(", "));
         return "Channel: " + channel + " | Args: [" + argsString + "]";
     }
 
