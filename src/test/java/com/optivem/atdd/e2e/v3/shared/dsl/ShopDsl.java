@@ -16,12 +16,10 @@ public class ShopDsl {
         var params = new Params(args);
         var sku = params.getString("sku", "99");
         var quantity = params.getString("quantity", "1");
-        driver.setSku(sku);
-        driver.setQuantity(quantity);
-        driver.submitOrder();
+        driver.submitOrder(sku, quantity);
     }
 
-    public void assertTotalPriceIsPositive() {
-        driver.assertTotalPriceIsPositive();
+    public void confirmTotalPriceIsPositive() {
+        driver.confirmTotalPriceIsPositive();
     }
 }

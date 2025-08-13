@@ -33,7 +33,7 @@ public class SystemDriverContext implements SystemDriver {
     }
 
     @Override
-    public void assertTotalPriceEquals(String expectedTotalPrice) {
-        getActiveDriver().assertTotalPriceEquals(expectedTotalPrice);
+    public void confirmTotalPriceEquals(String expectedTotalPrice) {
+        getActiveDriver().confirmTotalPriceEquals(expectedTotalPrice);
     }
 }

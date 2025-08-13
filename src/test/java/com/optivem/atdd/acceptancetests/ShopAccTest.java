@@ -1,7 +1,6 @@
 package com.optivem.atdd.acceptancetests;
 
 import com.optivem.atdd.acceptancetests.shared.channels.Channel;
-import com.optivem.atdd.acceptancetests.shared.channels.ChannelContext;
 import com.optivem.atdd.acceptancetests.shared.channels.ChannelExtension;
 import com.optivem.atdd.acceptancetests.shared.channels.ChannelType;
 import com.optivem.atdd.acceptancetests.shared.drivers.external.erp.ErpStubDriver;
@@ -12,7 +11,6 @@ import com.optivem.atdd.acceptancetests.shared.dsl.system.ShopDsl;
 import com.optivem.atdd.acceptancetests.shared.drivers.system.SystemUiDriver;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestTemplate;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
@@ -74,6 +72,6 @@ public class ShopAccTest {
     public void shouldCompletePurchaseSuccessfully() {
         erpStub.setupProduct("sku: ABC1001", "price: 2.50");
         shop.placeOrder("sku: ABC1001", "quantity: 5");
-        shop.assertConfirmation("totalPrice: 12.50");
+        shop.confirmOrder("totalPrice: 12.50");
     }
 }

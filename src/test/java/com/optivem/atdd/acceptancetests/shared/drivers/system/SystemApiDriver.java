@@ -49,7 +49,7 @@ public class SystemApiDriver implements SystemDriver {
     }
 
     @Override
-    public void assertTotalPriceEquals(String expectedTotalPrice) {
+    public void confirmTotalPriceEquals(String expectedTotalPrice) {
         var expected = Double.parseDouble(expectedTotalPrice);
         if (Double.compare(expected, lastTotalPrice) != 0) {
             throw new AssertionError("Expected total price: " + expected + ", but was: " + lastTotalPrice);

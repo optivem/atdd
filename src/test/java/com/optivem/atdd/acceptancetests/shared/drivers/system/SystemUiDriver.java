@@ -32,7 +32,7 @@ public class SystemUiDriver implements SystemDriver {
         driver.findElement(By.cssSelector("[aria-label='Place Order']")).click();
     }
 
-    public void assertTotalPriceEquals(String expectedTotalPrice) {
+    public void confirmTotalPriceEquals(String expectedTotalPrice) {
         var confirmationElement = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[role='alert']"))
         );
