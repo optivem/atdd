@@ -7,6 +7,8 @@ import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.http.MediaType;
 import reactor.core.publisher.Mono;
 
+import static org.junit.jupiter.api.Assertions.fail;
+
 public class SystemApiDriver implements SystemDriver {
     private final WebClient webClient;
     private final String baseUrl;

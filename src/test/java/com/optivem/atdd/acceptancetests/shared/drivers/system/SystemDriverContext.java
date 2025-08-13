@@ -3,6 +3,8 @@ package com.optivem.atdd.acceptancetests.shared.drivers.system;
 import com.optivem.atdd.acceptancetests.shared.channels.ChannelContext;
 import com.optivem.atdd.acceptancetests.shared.channels.ChannelType;
 
+import static org.junit.jupiter.api.Assertions.fail;
+
 public class SystemDriverContext implements SystemDriver {
     private final SystemUiDriver uiDriver;
     private final SystemApiDriver apiDriver;
@@ -14,12 +16,20 @@ public class SystemDriverContext implements SystemDriver {
 
     private SystemDriver getActiveDriver() {
         var channel = ChannelContext.get();
+
+        if(channel == null) {
+            fail("Current channel is null");
+        }
+
         if (channel == ChannelType.UI) {
             return uiDriver;
         } else if (channel == ChannelType.API) {
             return apiDriver;
         }
-        throw new RuntimeException("Current channel is null or unsupported!");
+
+        fail("Current channel is not recognized: " + channel);
+
+        throw new RuntimeException();
     }
 
     @Override
