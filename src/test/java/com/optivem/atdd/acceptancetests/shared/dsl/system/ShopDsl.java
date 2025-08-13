@@ -1,7 +1,7 @@
 package com.optivem.atdd.acceptancetests.shared.dsl.system;
 
 import com.optivem.atdd.acceptancetests.shared.drivers.system.SystemDriverContext;
-import com.optivem.atdd.acceptancetests.shared.dsl.util.Params;
+import com.optivem.atdd.acceptancetests.shared.dsl.util.DslParams;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -14,14 +14,14 @@ public class ShopDsl {
 
     public void placeOrder(String... args) {
         driver.load();
-        var params = new Params(args);
+        var params = new DslParams(args);
         var sku = params.getString("sku", "99");
         var quantity = params.getString("quantity", "1");
         driver.submitOrder(sku, quantity);
     }
 
     public void confirmOrder(String... args) {
-        var params = new Params(args);
+        var params = new DslParams(args);
         var expectedPrice = params.getString("totalPrice", "");
         driver.confirmTotalPriceEquals(expectedPrice);
     }
