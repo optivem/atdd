@@ -28,7 +28,7 @@ public class DslParams {
         return paramMap.getOrDefault(key, defaultValue);
     }
 
-    public String alias(String key) {
+    public String getAlias(String key) {
         var value = getValue(key);
         if (value == null) {
             fail("No alias found for key: " + key);

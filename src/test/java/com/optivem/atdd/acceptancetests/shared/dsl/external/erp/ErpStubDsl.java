@@ -1,8 +1,6 @@
 package com.optivem.atdd.acceptancetests.shared.dsl.external.erp;
 
 import com.optivem.atdd.acceptancetests.shared.drivers.external.erp.ErpStubDriver;
-import com.optivem.atdd.acceptancetests.shared.dsl.util.DslContext;
-import com.optivem.atdd.acceptancetests.shared.dsl.util.DslParams;
 import com.optivem.atdd.acceptancetests.shared.dsl.util.DslParamsFactory;
 
 public class ErpStubDsl {
@@ -16,7 +14,7 @@ public class ErpStubDsl {
 
     public void setupProduct(String... args) {
         var params = paramsFactory.create(args);
-        var sku = params.alias("sku");
+        var sku = params.getAlias("sku");
         var price = params.getValue("price", "0");
         erpStubDriver.setupProduct(sku, price);
     }
