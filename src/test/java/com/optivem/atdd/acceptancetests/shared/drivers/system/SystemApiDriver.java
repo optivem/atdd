@@ -1,5 +1,8 @@
 package com.optivem.atdd.acceptancetests.shared.drivers.system;
 
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.http.MediaType;
 import reactor.core.publisher.Mono;
@@ -27,10 +30,15 @@ public class SystemApiDriver implements SystemDriver {
 
     @Override
     public void submitOrder(String sku, String quantity) {
+        var orderRequest = OrderRequest.builder()
+                .sku(sku)
+                .quantity(Integer.parseInt(quantity))
+                .build();
+
         var responseMono = webClient.post()
                 .uri("/api/shop/order")
                 .contentType(MediaType.APPLICATION_JSON)
-                .bodyValue(new OrderRequest(sku, Integer.parseInt(quantity)))
+                .bodyValue(orderRequest)
                 .retrieve()
                 .bodyToMono(OrderResponse.class);
 
@@ -48,26 +56,15 @@ public class SystemApiDriver implements SystemDriver {
         }
     }
 
-    // DTOs
+    @Data
+    @Builder
     public static class OrderRequest {
         private String sku;
         private int quantity;
-
-        public OrderRequest(String sku, int quantity) {
-            this.sku = sku;
-            this.quantity = quantity;
-        }
-
-        public String getSku() { return sku; }
-        public void setSku(String sku) { this.sku = sku; }
-        public int getQuantity() { return quantity; }
-        public void setQuantity(int quantity) { this.quantity = quantity; }
     }
 
+    @Data
     public static class OrderResponse {
         private double totalPrice;
-
-        public double getTotalPrice() { return totalPrice; }
-        public void setTotalPrice(double totalPrice) { this.totalPrice = totalPrice; }
     }
 }
