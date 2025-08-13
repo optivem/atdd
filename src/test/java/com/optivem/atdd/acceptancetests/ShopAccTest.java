@@ -75,16 +75,16 @@ public class ShopAccTest {
     @TestTemplate
     @Channel({ChannelType.UI, ChannelType.API})
     public void shouldCompletePurchaseSuccessfully() {
-        erpStub.setupProduct("sku: ABC1001", "price: 2.50");
-        shop.placeOrder("sku: ABC1001", "quantity: 5");
+        erpStub.setupProduct("sku: ABC", "price: 2.50");
+        shop.placeOrder("sku: ABC", "quantity: 5");
         shop.confirmOrder("totalPrice: 12.50");
     }
 
     @TestTemplate
     @Channel({ChannelType.UI, ChannelType.API})
     public void shouldCompletePurchaseSuccessfully2() {
-        erpStub.setupProduct("sku: ABC1001", "price: 3.00");
-        shop.placeOrder("sku: ABC1001", "quantity: 10");
+        erpStub.setupProduct("sku: ABC", "price: 3.00");
+        shop.placeOrder("sku: ABC", "quantity: 10");
         shop.confirmOrder("totalPrice: 30.00");
     }
 }
