@@ -89,32 +89,6 @@ public class ShopAccTest {
         seleniumDriver.quit();
     }
 
-//    @TestTemplate
-//    @Channel({ChannelType.UI, ChannelType.API})
-//    public void shouldCompletePurchaseSuccessfully1() {
-//        erpStub.setupProduct("sku: ABC", "price: 2.50");
-//        shop.placeOrder("sku: ABC", "quantity: 5");
-//        shop.confirmOrder("totalPrice: 12.50");
-//    }
-//
-//    @TestTemplate
-//    @Channel({ChannelType.UI, ChannelType.API})
-//    public void shouldCompletePurchaseSuccessfully2() {
-//        erpStub.setupProduct("sku: ABC", "price: 3.00");
-//        shop.placeOrder("sku: ABC", "quantity: 10");
-//        shop.confirmOrder("totalPrice: 30.00");
-//    }
-
-
-//    @ChannelParameterizedTest({ChannelType.UI, ChannelType.API})
-//    @MethodSource("purchaseParameters")
-//    void shouldCompletePurchaseSuccessfully(ChannelType channel, String price, String quantity, String totalPrice) {
-//        systemDriverContext.setActiveChannel(channel);
-//        erpStub.setupProduct("sku: ABC", "price: " + price);
-//        shop.placeOrder("sku: ABC", "quantity: " + quantity);
-//        shop.confirmOrder("totalPrice: " + totalPrice);
-//    }
-//
     static Stream<Arguments> purchaseParameters() {
         return Stream.of(
             Arguments.of("2.50", "5", "12.50"),
@@ -132,8 +106,6 @@ public class ShopAccTest {
         shop.confirmOrder("totalPrice: " + totalPrice);
     }
 
-
-    @Disabled
     @TestTemplate
     @Channel({ChannelType.UI, ChannelType.API})
     public void shouldCompletePurchaseSuccessfullyThisIsSomePlainTest() {
