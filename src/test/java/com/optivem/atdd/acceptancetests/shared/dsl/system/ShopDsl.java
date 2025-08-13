@@ -19,8 +19,7 @@ public class ShopDsl {
     public void placeOrder(String... args) {
         driver.load();
         var params = paramsFactory.create(args);
-        var sku = params.getValue("sku", "99");
-        // var sku = params.alias("sku"); // TODO: VJ: Continue
+        var sku = params.alias("sku");
         var quantity = params.getValue("quantity", "1");
         driver.submitOrder(sku, quantity);
     }

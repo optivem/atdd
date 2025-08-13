@@ -14,8 +14,7 @@ public class ShopApiController {
 
     @PostMapping("/api/shop/order")
     public ResponseEntity<OrderConfirmation> placeOrder(@RequestBody OrderRequest orderRequest) {
-        // TODO: Implement order processing logic
-        OrderConfirmation confirmation = new OrderConfirmation();
+        var confirmation = new OrderConfirmation();
         confirmation.totalPrice = 12.50;
         return ResponseEntity.ok(confirmation);
     }

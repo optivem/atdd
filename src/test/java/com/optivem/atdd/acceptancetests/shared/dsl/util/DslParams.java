@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static org.junit.jupiter.api.Assertions.fail;
+
 public class DslParams {
     private final DslContext context;
     private final Map<String, String> paramMap;
@@ -26,16 +28,13 @@ public class DslParams {
         return paramMap.getOrDefault(key, defaultValue);
     }
 
-    public String alias(String sku) {
-        return null;
+    public String alias(String key) {
+        var value = getValue(key);
+        if (value == null) {
+            fail("No alias found for key: " + key);
+        }
 
-        // TODO: VJ: Implement alias resolution logic
-//        var value = getValue(key);
-//        if (value == null) {
-//            fail("No alias found for key: " + sku);
-//        }
-//
-//        return context.alias(value);
+        return context.alias(value);
     }
 
     private String getValue(String key) {
