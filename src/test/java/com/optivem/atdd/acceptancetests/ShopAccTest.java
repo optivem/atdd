@@ -21,7 +21,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestTemplate;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -106,36 +106,17 @@ public class ShopAccTest {
 
     @ChannelParameterizedTest({ChannelType.UI, ChannelType.API})
     @MethodSource("purchaseParameters")
-    void shouldCompletePurchaseSuccessfully(ChannelType channel, String sku, String price, String quantity, String totalPrice) {
+    void shouldCompletePurchaseSuccessfully(ChannelType channel, String price, String quantity, String totalPrice) {
         systemDriverContext.setActiveChannel(channel);
         erpStub.setupProduct("sku: ABC", "price: " + price);
         shop.placeOrder("sku: ABC", "quantity: " + quantity);
         shop.confirmOrder("totalPrice: " + totalPrice);
     }
 
-    static Stream<org.junit.jupiter.params.provider.Arguments> purchaseParameters() {
+    static Stream<Arguments> purchaseParameters() {
         return Stream.of(
-            org.junit.jupiter.params.provider.Arguments.of("ABC", "2.50", "5", "12.50"),
-            org.junit.jupiter.params.provider.Arguments.of("ABC", "3.00", "10", "30.00")
+            Arguments.of("2.50", "5", "12.50"),
+            Arguments.of("3.00", "10", "30.00")
         );
     }
-
-
-
-    // TODO: VJ: DELETE
-//    @ParameterizedTest
-//    @MethodSource("purchaseParameters")
-//    @Channel({ChannelType.UI, ChannelType.API})
-//    void shouldCompletePurchaseSuccessfully(String sku, String price, String quantity, String totalPrice) {
-//        erpStub.setupProduct("sku: " + sku, "price: " + price);
-//        shop.placeOrder("sku: " + sku, "quantity: " + quantity);
-//        shop.confirmOrder("totalPrice: " + totalPrice);
-//    }
-//
-//    static Stream<org.junit.jupiter.params.provider.Arguments> purchaseParameters() {
-//        return Stream.of(
-//            org.junit.jupiter.params.provider.Arguments.of("ABC", "2.50", "5", "12.50"),
-//            org.junit.jupiter.params.provider.Arguments.of("ABC", "3.00", "10", "30.00")
-//        );
-//    }
 }
