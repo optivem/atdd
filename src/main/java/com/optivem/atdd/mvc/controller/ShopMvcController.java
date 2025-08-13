@@ -1,4 +1,4 @@
-package com.optivem.atdd.controller;
+package com.optivem.atdd.mvc.controller;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,7 +12,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 @Controller
-public class ShopController {
+public class ShopMvcController {
 
     @Value("${erp.url}")
     private String erpUrl;
