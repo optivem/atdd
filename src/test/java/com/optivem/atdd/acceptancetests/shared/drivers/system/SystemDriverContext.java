@@ -3,33 +3,52 @@ package com.optivem.atdd.acceptancetests.shared.drivers.system;
 import com.optivem.atdd.acceptancetests.shared.channels.ChannelContext;
 import com.optivem.atdd.acceptancetests.shared.channels.ChannelType;
 
+import java.util.HashMap;
+
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class SystemDriverContext implements SystemDriver {
-    private final SystemUiDriver uiDriver;
-    private final SystemApiDriver apiDriver;
+    private final HashMap<ChannelType, SystemDriver> drivers;
 
-    public SystemDriverContext(SystemUiDriver uiDriver, SystemApiDriver apiDriver) {
-        this.uiDriver = uiDriver;
-        this.apiDriver = apiDriver;
+    private ChannelType cachedActiveChannel;
+    private SystemDriver cachedActiveDriver;
+
+    public SystemDriverContext(HashMap<ChannelType, SystemDriver> drivers) {
+        this.drivers = drivers;
+    }
+
+    private ChannelType getActiveChannel() {
+        if(cachedActiveChannel != null) {
+            return cachedActiveChannel;
+        }
+
+        cachedActiveChannel = ChannelContext.get();
+
+        if(cachedActiveChannel == null) {
+            fail("Active channel is null");
+        }
+
+        return cachedActiveChannel;
+    }
+
+    // NOTE: This is used in the case that it's not set by the context
+    public void setActiveChannel(ChannelType channel) {
+        cachedActiveChannel = channel;
     }
 
     private SystemDriver getActiveDriver() {
-        var channel = ChannelContext.get();
-
-        if(channel == null) {
-            fail("Current channel is null");
+        if(cachedActiveDriver != null) {
+            return cachedActiveDriver;
         }
 
-        if (channel == ChannelType.UI) {
-            return uiDriver;
-        } else if (channel == ChannelType.API) {
-            return apiDriver;
+        var activeChannel = getActiveChannel();
+
+        if(!drivers.containsKey(activeChannel)) {
+            fail("Current channel is not recognized: " + activeChannel);
         }
 
-        fail("Current channel is not recognized: " + channel);
-
-        throw new RuntimeException();
+        cachedActiveDriver = drivers.get(activeChannel);
+        return cachedActiveDriver;
     }
 
     @Override
@@ -46,4 +65,6 @@ public class SystemDriverContext implements SystemDriver {
     public void confirmTotalPriceEquals(String expectedTotalPrice) {
         getActiveDriver().confirmTotalPriceEquals(expectedTotalPrice);
     }
+
+
 }
