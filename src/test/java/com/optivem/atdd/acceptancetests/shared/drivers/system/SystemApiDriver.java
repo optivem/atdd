@@ -18,11 +18,11 @@ public class SystemApiDriver implements SystemDriver {
 
     @Override
     public void load() {
-//        webClient.get()
-//                .uri("/api/shop/echo")
-//                .retrieve()
-//                .bodyToMono(Void.class)
-//                .block();
+        webClient.get()
+                .uri("/api/shop/echo")
+                .retrieve()
+                .bodyToMono(Void.class)
+                .block();
     }
 
     @Override
