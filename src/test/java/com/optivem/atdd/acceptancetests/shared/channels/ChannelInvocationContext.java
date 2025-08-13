@@ -5,22 +5,25 @@ import org.junit.jupiter.api.extension.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class ChannelInvocationContext implements TestTemplateInvocationContext {
 
     private final ChannelType channel;
     private final Object[] arguments;
+    private final String[] paramNames;
 
-    public ChannelInvocationContext(ChannelType channel, Object[] arguments) {
+    public ChannelInvocationContext(ChannelType channel, Object[] arguments, String[] paramNames) {
         this.channel = channel;
         this.arguments = arguments;
+        this.paramNames = paramNames;
     }
 
     @Override
     public String getDisplayName(int invocationIndex) {
-        String argsString = Arrays.stream(arguments)
-                .map(String::valueOf)
-                .collect(Collectors.joining(", "));
+        String argsString = IntStream.range(0, arguments.length)
+            .mapToObj(i -> (paramNames.length > i ? paramNames[i] + "=" : "") + arguments[i])
+            .collect(Collectors.joining(", "));
         return "Channel: " + channel + " | Args: [" + argsString + "]";
     }
 

@@ -24,6 +24,11 @@ public class ChannelExtension implements TestTemplateInvocationContextProvider {
         Channel channelAnnotation = testMethod.getAnnotation(Channel.class);
         ChannelType[] channels = channelAnnotation.value();
 
+        // Get parameter names
+        String[] paramNames = Stream.of(testMethod.getParameters())
+            .map(p -> p.getName())
+            .toArray(String[]::new);
+
         MethodSource methodSource = testMethod.getAnnotation(MethodSource.class);
         String source = methodSource.value().length > 0 ? methodSource.value()[0] : testMethod.getName();
         try {
@@ -36,10 +41,10 @@ public class ChannelExtension implements TestTemplateInvocationContextProvider {
                 .map(argsObj -> (argsObj instanceof Arguments) ? ((Arguments) argsObj).get() : (Object[]) argsObj)
                 .collect(Collectors.toList());
 
-            // For each channel, for each parameter set, create a context with arguments
+            // For each channel, for each parameter set, create a context with arguments and param names
             return Stream.of(channels)
                 .flatMap(channel -> paramList.stream()
-                    .map(argsArr -> new ChannelInvocationContext(channel, argsArr)));
+                    .map(argsArr -> new ChannelInvocationContext(channel, argsArr, paramNames)));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
