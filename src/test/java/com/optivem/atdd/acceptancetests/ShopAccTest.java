@@ -9,6 +9,8 @@ import com.optivem.atdd.acceptancetests.shared.drivers.system.SystemDriverContex
 import com.optivem.atdd.acceptancetests.shared.dsl.external.erp.ErpStubDsl;
 import com.optivem.atdd.acceptancetests.shared.dsl.system.ShopDsl;
 import com.optivem.atdd.acceptancetests.shared.drivers.system.SystemUiDriver;
+import com.optivem.atdd.acceptancetests.shared.dsl.util.DslContext;
+import com.optivem.atdd.acceptancetests.shared.dsl.util.DslParamsFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestTemplate;
@@ -52,14 +54,17 @@ public class ShopAccTest {
 
         webClient = WebClient.create(erpUrl);
 
+        var context = new DslContext();
+        var paramsFactory = new DslParamsFactory(context);
+
         erpStubDriver = new ErpStubDriver(webClient);
-        erpStub = new ErpStubDsl(erpStubDriver);
+        erpStub = new ErpStubDsl(paramsFactory, erpStubDriver);
 
         var uiDriver = new SystemUiDriver(seleniumDriver, baseUrl + "/shop");
         var apiDriver = new SystemApiDriver(baseUrl);
         var systemDriverContext = new SystemDriverContext(uiDriver, apiDriver);
 
-        shop = new ShopDsl(systemDriverContext);
+        shop = new ShopDsl(paramsFactory, systemDriverContext);
     }
 
     @AfterEach
