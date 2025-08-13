@@ -1,5 +1,6 @@
 package com.optivem.atdd.e2e.v3.shared.dsl;
 
+import com.optivem.atdd.acceptancetests.shared.dsl.util.DslParams;
 import com.optivem.atdd.e2e.v3.shared.drivers.UiDriver;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -12,8 +13,8 @@ public class ShopDsl {
     }
 
     public void placeOrder(String... args) {
+        var params = DslParams.from(args);
         driver.load();
-        var params = new DslParams(args);
         var sku = params.getValue("sku", "99");
         var quantity = params.getValue("quantity", "1");
         driver.submitOrder(sku, quantity);

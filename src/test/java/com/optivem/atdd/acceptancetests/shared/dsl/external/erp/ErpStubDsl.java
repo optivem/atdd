@@ -11,7 +11,7 @@ public class ErpStubDsl {
     }
 
     public void setupProduct(String... args) {
-        var params = new DslParams(args);
+        var params = DslParams.from(args);
         var sku = params.getValue("sku", "DEFAULT_SKU");
         var price = params.getValue("price", "0");
         erpStubDriver.setupProduct(sku, price);
