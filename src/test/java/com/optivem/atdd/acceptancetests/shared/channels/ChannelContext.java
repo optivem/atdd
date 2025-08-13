@@ -6,17 +6,17 @@ import org.junit.jupiter.api.extension.ParameterContext;
 import org.junit.jupiter.api.extension.ParameterResolver;
 
 public class ChannelContext {
-    private static final ThreadLocal<ChannelType> currentChannel = new ThreadLocal<>();
+    private static final ThreadLocal<ChannelType> current = new ThreadLocal<>();
 
     public static void set(ChannelType channel) {
-        currentChannel.set(channel);
+        current.set(channel);
     }
 
     public static ChannelType get() {
-        return currentChannel.get();
+        return current.get();
     }
 
     public static void clear() {
-        currentChannel.remove();
+        current.remove();
     }
 }

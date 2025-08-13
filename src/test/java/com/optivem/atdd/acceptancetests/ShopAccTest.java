@@ -1,6 +1,7 @@
 package com.optivem.atdd.acceptancetests;
 
 import com.optivem.atdd.acceptancetests.shared.channels.Channel;
+import com.optivem.atdd.acceptancetests.shared.channels.ChannelContext;
 import com.optivem.atdd.acceptancetests.shared.channels.ChannelExtension;
 import com.optivem.atdd.acceptancetests.shared.channels.ChannelType;
 import com.optivem.atdd.acceptancetests.shared.channels.parametrized.ChannelParameterizedTest;
@@ -21,6 +22,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestTemplate;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.openqa.selenium.WebDriver;
@@ -87,36 +89,50 @@ public class ShopAccTest {
         seleniumDriver.quit();
     }
 
-    @TestTemplate
-    @Channel({ChannelType.UI, ChannelType.API})
-    public void shouldCompletePurchaseSuccessfully1() {
-        erpStub.setupProduct("sku: ABC", "price: 2.50");
-        shop.placeOrder("sku: ABC", "quantity: 5");
-        shop.confirmOrder("totalPrice: 12.50");
+//    @TestTemplate
+//    @Channel({ChannelType.UI, ChannelType.API})
+//    public void shouldCompletePurchaseSuccessfully1() {
+//        erpStub.setupProduct("sku: ABC", "price: 2.50");
+//        shop.placeOrder("sku: ABC", "quantity: 5");
+//        shop.confirmOrder("totalPrice: 12.50");
+//    }
+//
+//    @TestTemplate
+//    @Channel({ChannelType.UI, ChannelType.API})
+//    public void shouldCompletePurchaseSuccessfully2() {
+//        erpStub.setupProduct("sku: ABC", "price: 3.00");
+//        shop.placeOrder("sku: ABC", "quantity: 10");
+//        shop.confirmOrder("totalPrice: 30.00");
+//    }
+
+
+//    @ChannelParameterizedTest({ChannelType.UI, ChannelType.API})
+//    @MethodSource("purchaseParameters")
+//    void shouldCompletePurchaseSuccessfully(ChannelType channel, String price, String quantity, String totalPrice) {
+//        systemDriverContext.setActiveChannel(channel);
+//        erpStub.setupProduct("sku: ABC", "price: " + price);
+//        shop.placeOrder("sku: ABC", "quantity: " + quantity);
+//        shop.confirmOrder("totalPrice: " + totalPrice);
+//    }
+//
+    static Stream<Arguments> purchaseParameters() {
+        return Stream.of(
+            Arguments.of("2.50", "5", "12.50"),
+            Arguments.of("3.00", "10", "30.00"),
+            Arguments.of("5.00", "10", "50.00")
+        );
     }
 
-    @TestTemplate
     @Channel({ChannelType.UI, ChannelType.API})
-    public void shouldCompletePurchaseSuccessfully2() {
-        erpStub.setupProduct("sku: ABC", "price: 3.00");
-        shop.placeOrder("sku: ABC", "quantity: 10");
-        shop.confirmOrder("totalPrice: 30.00");
-    }
-
-
-    @ChannelParameterizedTest({ChannelType.UI, ChannelType.API})
+    @TestTemplate
     @MethodSource("purchaseParameters")
-    void shouldCompletePurchaseSuccessfully(ChannelType channel, String price, String quantity, String totalPrice) {
-        systemDriverContext.setActiveChannel(channel);
+    void shouldCompletePurchaseSuccessfully(String price, String quantity, String totalPrice) {
         erpStub.setupProduct("sku: ABC", "price: " + price);
         shop.placeOrder("sku: ABC", "quantity: " + quantity);
         shop.confirmOrder("totalPrice: " + totalPrice);
     }
 
-    static Stream<Arguments> purchaseParameters() {
-        return Stream.of(
-            Arguments.of("2.50", "5", "12.50"),
-            Arguments.of("3.00", "10", "30.00")
-        );
-    }
+
 }
+
+

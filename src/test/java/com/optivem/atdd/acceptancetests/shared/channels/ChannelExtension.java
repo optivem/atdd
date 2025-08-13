@@ -1,27 +1,47 @@
 package com.optivem.atdd.acceptancetests.shared.channels;
 
-import org.junit.jupiter.api.extension.ExtensionContext;
-import org.junit.jupiter.api.extension.TestTemplateInvocationContext;
-import org.junit.jupiter.api.extension.TestTemplateInvocationContextProvider;
+import org.junit.jupiter.api.extension.*;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.lang.reflect.Method;
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ChannelExtension implements TestTemplateInvocationContextProvider {
 
     @Override
     public boolean supportsTestTemplate(ExtensionContext context) {
-        return context.getTestMethod()
-                .map(method -> method.isAnnotationPresent(Channel.class))
-                .orElse(false);
+        return context.getTestMethod().isPresent() &&
+               context.getTestMethod().get().isAnnotationPresent(Channel.class) &&
+               context.getTestMethod().get().isAnnotationPresent(MethodSource.class);
     }
 
     @Override
     public Stream<TestTemplateInvocationContext> provideTestTemplateInvocationContexts(ExtensionContext context) {
-        Method testMethod = context.getTestMethod().orElseThrow();
+        Method testMethod = context.getRequiredTestMethod();
         Channel channelAnnotation = testMethod.getAnnotation(Channel.class);
+        ChannelType[] channels = channelAnnotation.value();
 
-        return Stream.of(channelAnnotation.value())
-                .map(channel -> new ChannelInvocationContext(channel));
+        MethodSource methodSource = testMethod.getAnnotation(MethodSource.class);
+        String source = methodSource.value().length > 0 ? methodSource.value()[0] : testMethod.getName();
+        try {
+            Method paramMethod = testMethod.getDeclaringClass().getDeclaredMethod(source);
+            paramMethod.setAccessible(true);
+            Stream<?> paramStream = (Stream<?>) paramMethod.invoke(null);
+
+            // Collect all parameter sets into a list to avoid reusing the stream
+            List<Object[]> paramList = paramStream
+                .map(argsObj -> (argsObj instanceof Arguments) ? ((Arguments) argsObj).get() : (Object[]) argsObj)
+                .collect(Collectors.toList());
+
+            // For each channel, for each parameter set, create a context with arguments
+            return Stream.of(channels)
+                .flatMap(channel -> paramList.stream()
+                    .map(argsArr -> new ChannelInvocationContext(channel, argsArr)));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }
