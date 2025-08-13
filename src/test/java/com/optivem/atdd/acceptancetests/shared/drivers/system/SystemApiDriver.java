@@ -27,22 +27,22 @@ public class SystemApiDriver implements SystemDriver {
 
     @Override
     public void submitOrder(String sku, String quantity) {
-//        Mono<OrderResponse> responseMono = webClient.post()
-//                .uri("/api/shop/order")
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .bodyValue(new OrderRequest(sku, Integer.parseInt(quantity)))
-//                .retrieve()
-//                .bodyToMono(OrderResponse.class);
-//
-//        OrderResponse response = responseMono.block();
-//        if (response != null) {
-//            lastTotalPrice = response.getTotalPrice();
-//        }
+        var responseMono = webClient.post()
+                .uri("/api/shop/order")
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(new OrderRequest(sku, Integer.parseInt(quantity)))
+                .retrieve()
+                .bodyToMono(OrderResponse.class);
+
+        var response = responseMono.block();
+        if (response != null) {
+            lastTotalPrice = response.getTotalPrice();
+        }
     }
 
     @Override
     public void assertTotalPriceEquals(String expectedTotalPrice) {
-//        double expected = Double.parseDouble(expectedTotalPrice);
+//        var expected = Double.parseDouble(expectedTotalPrice);
 //        if (Double.compare(expected, lastTotalPrice) != 0) {
 //            throw new AssertionError("Expected total price: " + expected + ", but was: " + lastTotalPrice);
 //        }

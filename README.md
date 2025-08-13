@@ -12,8 +12,16 @@ MIT Licence
 ## Local Execution
 
 Ensure Docker Deskop is running.
+Make sure you've setup JAVA_HOME and added the `bin` directory to your `PATH`.
+We're using JDK 24.
 
 ```shell
 docker compose up -d
 ./gradlew build
+```
+
+For debugging:
+
+```shell
+./gradlew build --info --stacktrace
 ```
