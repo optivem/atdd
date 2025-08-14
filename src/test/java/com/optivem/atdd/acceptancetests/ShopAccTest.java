@@ -4,12 +4,12 @@ import com.optivem.atdd.acceptancetests.shared.channels.Channel;
 import com.optivem.atdd.acceptancetests.shared.channels.ChannelExtension;
 import com.optivem.atdd.acceptancetests.shared.channels.ChannelType;
 import com.optivem.atdd.acceptancetests.shared.drivers.external.erp.ErpStubDriver;
-import com.optivem.atdd.acceptancetests.shared.drivers.system.SystemApiDriver;
+import com.optivem.atdd.acceptancetests.shared.drivers.system.api.SystemApiDriver;
 import com.optivem.atdd.acceptancetests.shared.drivers.system.SystemDriver;
 import com.optivem.atdd.acceptancetests.shared.drivers.system.SystemDriverContext;
 import com.optivem.atdd.acceptancetests.shared.dsl.external.erp.ErpStubDsl;
 import com.optivem.atdd.acceptancetests.shared.dsl.system.ShopDsl;
-import com.optivem.atdd.acceptancetests.shared.drivers.system.SystemUiDriver;
+import com.optivem.atdd.acceptancetests.shared.drivers.system.ui.SystemUiDriver;
 import com.optivem.atdd.acceptancetests.shared.dsl.util.DslContext;
 import com.optivem.atdd.acceptancetests.shared.dsl.util.DslParamsFactory;
 
