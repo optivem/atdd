@@ -24,11 +24,11 @@ public class ShopDsl {
         driver.submitOrder(orderNumber, sku, quantity);
     }
 
-    public void confirmOrder(String... args) {
+    public void confirmOrderTotalPrice(String... args) {
         var params = paramsFactory.create(args);
         var orderNumber = params.getAlias("orderNumber");
         var expectedPrice = params.getValue("totalPrice", "150.00");
-        driver.confirmTotalPriceEquals(orderNumber, expectedPrice);
+        driver.confirmOrderTotalPrice(orderNumber, expectedPrice);
     }
 
     public void confirmOrderNumberGenerated(String... args) {

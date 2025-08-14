@@ -62,8 +62,8 @@ public class SystemDriverContext implements SystemDriver {
     }
 
     @Override
-    public void confirmTotalPriceEquals(String orderNumber, String expectedTotalPrice) {
-        getActiveDriver().confirmTotalPriceEquals(orderNumber, expectedTotalPrice);
+    public void confirmOrderTotalPrice(String orderNumber, String expectedTotalPrice) {
+        getActiveDriver().confirmOrderTotalPrice(orderNumber, expectedTotalPrice);
     }
 
     @Override

@@ -1,7 +1,6 @@
 package com.optivem.atdd.acceptancetests;
 
 import com.optivem.atdd.acceptancetests.shared.channels.Channel;
-import com.optivem.atdd.acceptancetests.shared.channels.ChannelContext;
 import com.optivem.atdd.acceptancetests.shared.channels.ChannelExtension;
 import com.optivem.atdd.acceptancetests.shared.channels.ChannelType;
 import com.optivem.atdd.acceptancetests.shared.drivers.external.erp.ErpStubDriver;
@@ -19,10 +18,8 @@ import java.util.stream.Stream;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.TestTemplate;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.openqa.selenium.WebDriver;
@@ -103,15 +100,7 @@ public class ShopAccTest {
     void shouldCompletePurchaseSuccessfully(String price, String quantity, String totalPrice) {
         erpStub.setupProduct("sku: ABC", "price: " + price);
         shop.placeOrder("orderNumber: ORD-1001", "sku: ABC", "quantity: " + quantity);
-        shop.confirmOrder("orderNumber: ORD-1001", "totalPrice: " + totalPrice);
-    }
-
-    @TestTemplate
-    @Channel({ChannelType.UI, ChannelType.API})
-    public void shouldCompletePurchaseSuccessfullyThisIsSomePlainTest() {
-        erpStub.setupProduct("sku: ABC", "price: 2.50");
-        shop.placeOrder("orderNumber: ORD-1001", "sku: ABC", "quantity: 5");
-        shop.confirmOrder("orderNumber: ORD-1001", "totalPrice: 12.50");
+        shop.confirmOrderTotalPrice("orderNumber: ORD-1001", "totalPrice: " + totalPrice);
     }
 
     @TestTemplate

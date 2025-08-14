@@ -46,10 +46,10 @@ public class ShopMvcController {
                     <input name='quantity' aria-label='Quantity' value='%d' />
                     <button type='submit' aria-label='Place Order'>Place Order</button>
                 </form>
-                <div role='alert'>Success! Total Price is $%.2f</div>
+                <div role='alert'>Success! Order has been created with Order Number %s and Total Price $%.2f</div>
             </body>
             </html>
-            """.formatted(sku, quantity, totalPrice);
+            """.formatted(sku, quantity, orderNumber, totalPrice);
     }
 
 

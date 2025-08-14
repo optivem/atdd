@@ -67,7 +67,7 @@ public class SystemApiDriver implements SystemDriver {
     }
 
     @Override
-    public void confirmTotalPriceEquals(String orderNumber, String expectedTotalPrice) {
+    public void confirmOrderTotalPrice(String orderNumber, String expectedTotalPrice) {
         var expected = Double.parseDouble(expectedTotalPrice);
 
         var externalOrderNumber = orderNumbers.get(orderNumber);

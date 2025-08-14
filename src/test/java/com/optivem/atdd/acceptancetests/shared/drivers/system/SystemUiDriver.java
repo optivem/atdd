@@ -16,7 +16,7 @@ public class SystemUiDriver implements SystemDriver {
     private final WebDriverWait wait;
 
     private static final Pattern ORDER_CONFIRMATION_PATTERN = Pattern.compile(
-            "Success! Order has been created with Order Number (\\w+) and Total Price \\$(\\d+(?:\\.\\d{2})?)"
+            "Success! Order has been created with Order Number ([\\w-]+) and Total Price \\$(\\d+(?:\\.\\d{2})?)"
     );
 
     private static final int ORDER_NUMBER_GROUP = 1;
@@ -42,7 +42,22 @@ public class SystemUiDriver implements SystemDriver {
     }
 
     @Override
-    public void confirmTotalPriceEquals(String orderNumber, String expectedTotalPrice) {
+    public void confirmOrderNumberGenerated(String orderNumber) {
+        var confirmationElement = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[role='alert']"))
+        );
+
+        var confirmation = confirmationElement.getText();
+
+        var matcher = ORDER_CONFIRMATION_PATTERN
+                .matcher(confirmation);
+
+        assertThat(matcher.find()).isTrue();
+        assertThat(matcher.group(ORDER_NUMBER_GROUP)).isNotEmpty();
+    }
+
+    @Override
+    public void confirmOrderTotalPrice(String orderNumber, String expectedTotalPrice) {
         var confirmationElement = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[role='alert']"))
         );
@@ -56,21 +71,5 @@ public class SystemUiDriver implements SystemDriver {
         assertThat(matcher.group(TOTAL_PRICE_GROUP)).isEqualTo(expectedTotalPrice);
     }
 
-    @Override
-    public void confirmOrderNumberGenerated(String orderNumber) {
 
-        // TODO: VJ: Rework this
-
-        var confirmationElement = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[role='alert']"))
-        );
-
-        var confirmation = confirmationElement.getText();
-
-        var matcher = ORDER_CONFIRMATION_PATTERN
-                .matcher(confirmation);
-
-        assertThat(matcher.find()).isTrue();
-        assertThat(matcher.group(ORDER_NUMBER_GROUP)).isNotEmpty();
-    }
 }
