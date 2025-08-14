@@ -40,4 +40,6 @@ public class DslParams {
     private String getValue(String key) {
         return paramMap.get(key);
     }
+
+    // TODO: VJ: The method getValue(...) is for a single value, but we could also have methods getListValue(...) or getMatrixValue(...) for additional types
 }
