@@ -14,7 +14,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.context.ActiveProfiles;
 
-@Disabled
 public class ShopE2ETestV3 {
     private int port = TestConfiguration.SERVER_PORT;
 
