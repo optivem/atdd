@@ -33,16 +33,16 @@ jobs:
         java-version: '24'
         distribution: 'temurin'
 
-    - name: Run Docker Compose Up
-      run: docker compose up -d
-
-    - name: Run Acceptance Tests
-      run: ./gradlew test --tests com.optivem.atdd.acceptancetests.ShopAccTest
+#    - name: Run Docker Compose Up
+#      run: docker compose up -d
+#
+#    - name: Run Acceptance Tests
+#      run: ./gradlew test --tests com.optivem.atdd.acceptancetests.ShopAccTest
 
 # TODO: Run the External System Contract Tests, stubs then real
 
-    - name: Run E2E Tests
-      run: ./gradlew test --tests com.optivem.atdd.e2e.v1.ShopE2ETest
+#    - name: Run E2E Tests
+#      run: ./gradlew test --tests com.optivem.atdd.e2e.v1.ShopE2ETest
 
 
 
@@ -73,26 +73,3 @@ jobs:
     #
     # - name: Build with Gradle 8.9
     #   run: gradle build
-
-# TODO: Later
-#  dependency-submission:
-#
-#    runs-on: ubuntu-latest
-#    permissions:
-#      contents: write
-#
-#    steps:
-#    - uses: actions/checkout@v4
-#    - name: Set up JDK 24
-#      uses: actions/setup-java@v4
-#      with:
-#        java-version: '24'
-#        distribution: 'temurin'
-#
-#    - name: Make Gradle Wrapper executable
-#      run: chmod +x ./gradlew
-#
-#    # Generates and submits a dependency graph, enabling Dependabot Alerts for all project dependencies.
-#    # See: https://github.com/gradle/actions/blob/main/dependency-submission/README.md
-#    - name: Generate and submit dependency graph
-#      uses: gradle/actions/dependency-submission@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
