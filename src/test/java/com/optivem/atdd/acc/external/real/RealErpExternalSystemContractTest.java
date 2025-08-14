@@ -1,6 +1,7 @@
-package com.optivem.atdd.acc;
+package com.optivem.atdd.acc.external.real;
 
 import com.optivem.atdd.TestConfiguration;
+import com.optivem.atdd.acc.external.base.BaseErpExternalSystemContractTest;
 import com.optivem.atdd.acc.shared.drivers.external.erp.ErpDriver;
 import com.optivem.atdd.acc.shared.drivers.external.erp.RealErpDriver;
 import org.springframework.web.reactive.function.client.WebClient;

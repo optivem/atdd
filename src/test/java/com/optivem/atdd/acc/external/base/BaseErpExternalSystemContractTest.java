@@ -1,4 +1,4 @@
-package com.optivem.atdd.acc;
+package com.optivem.atdd.acc.external.base;
 
 import com.optivem.atdd.acc.shared.drivers.external.erp.ErpDriver;
 import org.junit.jupiter.api.BeforeEach;

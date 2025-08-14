@@ -1,6 +1,7 @@
-package com.optivem.atdd.acc;
+package com.optivem.atdd.acc.external.stub;
 
 import com.optivem.atdd.TestConfiguration;
+import com.optivem.atdd.acc.external.base.BaseErpExternalSystemContractTest;
 import com.optivem.atdd.acc.shared.drivers.external.erp.ErpDriver;
 import com.optivem.atdd.acc.shared.drivers.external.erp.ErpStubDriver;
 import org.junit.jupiter.api.Test;

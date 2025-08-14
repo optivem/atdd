@@ -36,7 +36,7 @@ jobs:
     # Configure Gradle for optimal use in GitHub Actions, including caching of downloaded dependencies.
     # See: https://github.com/gradle/actions/blob/main/setup-gradle/README.md
     - name: Setup Gradle
-      uses: gradle/actions/setup-gradle@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
+      uses: gradle/actions/setup-gradle@v4.0.0
 
     - name: Make Gradle Wrapper executable
       run: chmod +x ./gradlew
@@ -47,10 +47,10 @@ jobs:
       # For this demo application, I'm using Docker Compose
 
     - name: Run Acceptance Tests
-      run: ./gradlew test --tests com.optivem.atdd.acceptancetests.ShopAccTest
+      run: ./gradlew test --tests com.optivem.atdd.acc.acceptance.*
 
     - name: Run External System Contract Tests (targeting External System Stubs)
-      run: ./gradlew test --tests com.optivem.atdd.acceptancetests.ErpStubExternalSystemContractTest
+      run: ./gradlew test --tests com.optivem.atdd.acc.external.stub.*
 
     - name: Destroy Acceptance Test Environment
       run: docker compose -f docker-compose.acc.yml down
@@ -63,48 +63,12 @@ jobs:
       # For this demo application, I'm using Docker Compose
 
     - name: Run External System Contract Tests (targeting External System Test Instances)
-      run: ./gradlew test --tests com.optivem.atdd.acceptancetests.RealErpExternalSystemContractTest
+      run: ./gradlew test --tests com.optivem.atdd.acc.external.real.*
 
     - name: Run E2E Tests
-      run: ./gradlew test --tests com.optivem.atdd.e2e.v3.ShopE2ETestV3
+      run: ./gradlew test --tests com.optivem.atdd.e2e.*
 
     - name: Destroy Acceptance Test Environment
       run: docker compose -f docker-compose.e2e.yml down
       # Note: In real life applications, your choice whether to have transient or permament
       # Here I destroyed it due to Docker Compose
-
-
-# TODO: Run the External System Contract Tests, stubs then real
-
-#    - name: Run E2E Tests
-#      run: ./gradlew test --tests com.optivem.atdd.e2e.v1.ShopE2ETest
-
-
-
-    #    # Configure Gradle for optimal use in GitHub Actions, including caching of downloaded dependencies.
-#    # See: https://github.com/gradle/actions/blob/main/setup-gradle/README.md
-#    - name: Setup Gradle
-#      uses: gradle/actions/setup-gradle@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
-#
-#    - name: Make Gradle Wrapper executable
-#      run: chmod +x ./gradlew
-#
-#    - name: Run Docker Compose Up
-#      run: docker compose up -d
-#
-#    - name: Build with Gradle Wrapper
-#      run: ./gradlew build --info --stacktrace
-#
-#    - name: Run Docker Compose Down
-#      run: docker compose down
-
-    # NOTE: The Gradle Wrapper is the default and recommended way to run Gradle (https://docs.gradle.org/current/userguide/gradle_wrapper.html).
-    # If your project does not have the Gradle Wrapper configured, you can use the following configuration to run Gradle with a specified version.
-    #
-    # - name: Setup Gradle
-    #   uses: gradle/actions/setup-gradle@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
-    #   with:
-    #     gradle-version: '8.9'
-    #
-    # - name: Build with Gradle 8.9
-    #   run: gradle build

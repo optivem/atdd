@@ -1,4 +1,4 @@
-package com.optivem.atdd.acc;
+package com.optivem.atdd.acc.acceptance;
 
 import com.optivem.atdd.TestConfiguration;
 import com.optivem.atdd.acc.shared.channels.Channel;
