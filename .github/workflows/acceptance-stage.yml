@@ -41,7 +41,7 @@ jobs:
     - name: Make Gradle Wrapper executable
       run: chmod +x ./gradlew
 
-    - name: Setup Acceptance Test Environment
+    - name: Setup Acceptance Environment for Acceptance Tests
       run: docker compose -f docker-compose.acc.yml up -d
       # NOTE: In real life applications, you'd be deploying your System to Acceptance Environment
       # For this demo application, I'm using Docker Compose
@@ -49,13 +49,27 @@ jobs:
     - name: Run Acceptance Tests
       run: ./gradlew test --tests com.optivem.atdd.acceptancetests.ShopAccTest
 
-    - name: Run External System Contract Tests (Stubs)
+    - name: Run External System Contract Tests (targeting External System Stubs)
       run: ./gradlew test --tests com.optivem.atdd.acceptancetests.ErpStubExternalSystemContractTest
 
     - name: Destroy Acceptance Test Environment
       run: docker compose -f docker-compose.acc.yml down
       # Note: In real life applications, your choice whether to have transient or permament
       # Here I destroyed it due to Docker Compose
+
+    - name: Setup Acceptance Environment for E2E Tests
+      run: docker compose -f docker-compose.e2e.yml up -d
+      # NOTE: In real life applications, you'd be deploying your System to Acceptance Environment
+      # For this demo application, I'm using Docker Compose
+
+    - name: Run External System Contract Tests (targeting External System Test Instances)
+      run: ./gradlew test --tests com.optivem.atdd.acceptancetests.RealErpExternalSystemContractTest
+
+    - name: Destroy Acceptance Test Environment
+      run: docker compose -f docker-compose.e2e.yml down
+      # Note: In real life applications, your choice whether to have transient or permament
+      # Here I destroyed it due to Docker Compose
+
 
 # TODO: Run the External System Contract Tests, stubs then real
 
