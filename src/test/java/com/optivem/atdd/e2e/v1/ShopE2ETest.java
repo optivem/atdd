@@ -11,6 +11,7 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.time.Duration;
+import java.util.regex.Pattern;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -55,8 +56,15 @@ class ShopE2ETest {
         var wait = new WebDriverWait(seleniumDriver, Duration.ofSeconds(10));
         var confirmationMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[role='alert']")));
 
-        var text = confirmationMessage.getText();
+        var confirmationMessageText = confirmationMessage.getText();
 
-        assertThat(text).matches("Success! Total Price is \\$\\d+(\\.\\d{2})?");
+        var pattern = Pattern.compile("Success! Order has been created with Order Number ([\\w-]+) and Total Price \\$(\\d+(?:\\.\\d{2})?)");
+        var matcher = pattern.matcher(confirmationMessageText);
+
+        assertThat(matcher.find());
+
+        var totalPriceString = matcher.group(2);
+        var totalPrice = Double.parseDouble(totalPriceString);
+        assertThat(totalPrice).isPositive();
     }
 }

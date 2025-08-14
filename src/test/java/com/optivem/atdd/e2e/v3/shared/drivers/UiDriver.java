@@ -6,6 +6,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.regex.Pattern;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -36,8 +37,15 @@ public class UiDriver {
                 ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[role='alert']"))
         );
 
-        var confirmation = confirmationElement.getText();
+        var confirmationMessageText = confirmationElement.getText();
 
-        assertThat(confirmation).matches("Success! Total Price is \\$\\d+(\\.\\d{2})?");
+        var pattern = Pattern.compile("Success! Order has been created with Order Number ([\\w-]+) and Total Price \\$(\\d+(?:\\.\\d{2})?)");
+        var matcher = pattern.matcher(confirmationMessageText);
+
+        assertThat(matcher.find());
+
+        var totalPriceString = matcher.group(2);
+        var totalPrice = Double.parseDouble(totalPriceString);
+        assertThat(totalPrice).isPositive();
     }
 }

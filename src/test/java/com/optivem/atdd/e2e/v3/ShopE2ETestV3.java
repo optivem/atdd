@@ -15,7 +15,6 @@ import org.springframework.test.context.ActiveProfiles;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("e2e")
 public class ShopE2ETestV3 {
-
     @LocalServerPort
     private int port;
 

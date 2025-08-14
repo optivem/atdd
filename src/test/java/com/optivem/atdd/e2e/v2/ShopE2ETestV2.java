@@ -8,6 +8,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.context.ActiveProfiles;
 
+import java.util.regex.Pattern;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -41,7 +43,15 @@ class ShopE2ETestV2 {
         shopPage.enterQuantity("5");
         shopPage.placeOrder();
 
-        String text = shopPage.getConfirmationMessage();
-        assertThat(text).matches("Success! Total Price is \\$\\d+(\\.\\d{2})?");
+        var confirmationMessageText = shopPage.getConfirmationMessage();
+
+        var pattern = Pattern.compile("Success! Order has been created with Order Number ([\\w-]+) and Total Price \\$(\\d+(?:\\.\\d{2})?)");
+        var matcher = pattern.matcher(confirmationMessageText);
+
+        assertThat(matcher.find());
+
+        var totalPriceString = matcher.group(2);
+        var totalPrice = Double.parseDouble(totalPriceString);
+        assertThat(totalPrice).isPositive();
     }
 }

@@ -1,12 +1,7 @@
 package com.optivem.atdd.acceptancetests.shared.drivers.system.ui;
 
 import com.optivem.atdd.acceptancetests.shared.drivers.system.SystemDriver;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 import java.util.regex.Pattern;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -14,9 +9,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class SystemUiDriver implements SystemDriver {
     private final ShopPage shopPage;
 
-    private static final Pattern ORDER_CONFIRMATION_PATTERN = Pattern.compile(
-            "Success! Order has been created with Order Number ([\\w-]+) and Total Price \\$(\\d+(?:\\.\\d{2})?)"
-    );
+    private static final String ORDER_CONFIRMATION_REGEX = "Success! Order has been created with Order Number ([\\w-]+) and Total Price \\$(\\d+(?:\\.\\d{2})?)";
+    private static final Pattern ORDER_CONFIRMATION_PATTERN = Pattern.compile(ORDER_CONFIRMATION_REGEX);
 
     private static final int ORDER_NUMBER_GROUP = 1;
     private static final int TOTAL_PRICE_GROUP = 2;
