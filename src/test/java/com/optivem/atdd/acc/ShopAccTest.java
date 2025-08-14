@@ -1,0 +1,113 @@
+package com.optivem.atdd.acc;
+
+import com.optivem.atdd.TestConfiguration;
+import com.optivem.atdd.acc.shared.channels.Channel;
+import com.optivem.atdd.acc.shared.channels.ChannelExtension;
+import com.optivem.atdd.acc.shared.channels.ChannelType;
+import com.optivem.atdd.acc.shared.drivers.external.erp.ErpStubDriver;
+import com.optivem.atdd.acc.shared.drivers.system.api.SystemApiDriver;
+import com.optivem.atdd.acc.shared.drivers.system.SystemDriver;
+import com.optivem.atdd.acc.shared.drivers.system.SystemDriverContext;
+import com.optivem.atdd.acc.shared.dsl.external.erp.ErpStubDsl;
+import com.optivem.atdd.acc.shared.dsl.system.ShopDsl;
+import com.optivem.atdd.acc.shared.drivers.system.ui.SystemUiDriver;
+import com.optivem.atdd.acc.shared.dsl.util.DslContext;
+import com.optivem.atdd.acc.shared.dsl.util.DslParamsFactory;
+
+import java.util.HashMap;
+import java.util.stream.Stream;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.TestTemplate;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.springframework.web.reactive.function.client.WebClient;
+
+// TODO: VJ: What to do?
+//@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+// @ActiveProfiles("acc")
+@ExtendWith(ChannelExtension.class)
+public class ShopAccTest {
+
+//    @LocalServerPort
+    private int port = TestConfiguration.SERVER_PORT;
+
+    // @Value("${erp.url}") // TODO: VJ: what to do?
+    private String erpUrl = TestConfiguration.ERP_URL_ACC;
+
+    private WebDriver seleniumDriver;
+    private String baseUrl;
+
+    private WebClient webClient;
+
+    private SystemDriverContext systemDriverContext;
+
+    private ErpStubDriver erpStubDriver;
+    private ErpStubDsl erpStub;
+
+    private ShopDsl shop;
+
+    @BeforeEach
+    void setUp() {
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless=new");
+        seleniumDriver = new ChromeDriver(options);
+        baseUrl = "http://localhost:" + port;
+
+        webClient = WebClient.create(erpUrl);
+
+        var context = new DslContext();
+        var paramsFactory = new DslParamsFactory(context);
+
+        erpStubDriver = new ErpStubDriver(webClient);
+        erpStub = new ErpStubDsl(paramsFactory, erpStubDriver);
+
+        var uiDriver = new SystemUiDriver(seleniumDriver, baseUrl + "/shop");
+        var apiDriver = new SystemApiDriver(baseUrl);
+        var drivers = new HashMap<ChannelType, SystemDriver>();
+        drivers.put(ChannelType.UI, uiDriver);
+        drivers.put(ChannelType.API, apiDriver);
+
+        this.systemDriverContext = new SystemDriverContext(drivers);
+
+        shop = new ShopDsl(paramsFactory, systemDriverContext);
+    }
+
+    @AfterEach
+    void tearDown() {
+        seleniumDriver.quit();
+    }
+
+    static Stream<Arguments> purchaseParameters() {
+        return Stream.of(
+            Arguments.of("2.50", "5", "12.50"),
+            Arguments.of("3.00", "10", "30.00"),
+            Arguments.of("5.00", "10", "50.00")
+        );
+    }
+
+    @Channel({ChannelType.UI, ChannelType.API})
+    @TestTemplate
+    @MethodSource("purchaseParameters")
+    void shouldCompletePurchaseSuccessfully(String price, String quantity, String totalPrice) {
+        erpStub.setupProduct("sku: ABC", "price: " + price);
+        shop.placeOrder("orderNumber: ORD-1001", "sku: ABC", "quantity: " + quantity);
+        shop.confirmOrderTotalPrice("orderNumber: ORD-1001", "totalPrice: " + totalPrice);
+    }
+
+    @TestTemplate
+    @Channel({ChannelType.UI, ChannelType.API})
+    public void shouldGenerateOrderNumber() {
+        erpStub.setupProduct("sku: ABC");
+        shop.placeOrder("orderNumber: ORD-1001", "sku: ABC");
+        shop.confirmOrderNumberGenerated("orderNumber: ORD-1001");
+    }
+
+}
+
+
