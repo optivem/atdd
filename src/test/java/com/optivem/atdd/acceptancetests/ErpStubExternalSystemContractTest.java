@@ -1,5 +1,6 @@
 package com.optivem.atdd.acceptancetests;
 
+import com.optivem.atdd.TestConfiguration;
 import com.optivem.atdd.acceptancetests.shared.drivers.external.erp.ErpDriver;
 import com.optivem.atdd.acceptancetests.shared.drivers.external.erp.ErpStubDriver;
 import org.junit.jupiter.api.Disabled;
@@ -11,16 +12,10 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@Disabled
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ActiveProfiles("acc")
 public class ErpStubExternalSystemContractTest extends BaseErpExternalSystemContractTest {
-    @Value("${erp.url}")
-    private String erpUrl;
-
     @Override
     protected String getErpUrl() {
-        return erpUrl;
+        return TestConfiguration.ERP_URL_ACC;
     }
 
     @Override

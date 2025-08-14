@@ -49,6 +49,9 @@ jobs:
     - name: Run Acceptance Tests
       run: ./gradlew test --tests com.optivem.atdd.acceptancetests.ShopAccTest
 
+    - name: Run External System Contract Tests (Stubs)
+      run: ./gradlew test --tests com.optivem.atdd.acceptancetests.ErpStubExternalSystemContractTest
+
     - name: Destroy Acceptance Test Environment
       run: docker compose -f docker-compose.acc.yml down
       # Note: In real life applications, your choice whether to have transient or permament
