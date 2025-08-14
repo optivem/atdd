@@ -26,7 +26,7 @@ public class SystemUiDriver implements SystemDriver {
         driver.get(shopUrl);
     }
 
-    public void submitOrder(String sku, String quantity) {
+    public void submitOrder(String key, String sku, String quantity) {
         driver.findElement(By.cssSelector("[aria-label='SKU']")).sendKeys(sku);
         driver.findElement(By.cssSelector("[aria-label='Quantity']")).sendKeys(quantity);
         driver.findElement(By.cssSelector("[aria-label='Place Order']")).click();
@@ -44,5 +44,22 @@ public class SystemUiDriver implements SystemDriver {
 
         assertThat(matcher.find()).isTrue();
         assertThat(matcher.group(1)).isEqualTo(expectedTotalPrice);
+    }
+
+    @Override
+    public void confirmOrderNumberGenerated(String key) {
+
+        // TODO: VJ: Rework this
+
+        var confirmationElement = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[role='alert']"))
+        );
+
+        var confirmation = confirmationElement.getText();
+
+        var matcher = Pattern.compile("Success! Total Price is \\$(\\d+(?:\\.\\d{2})?)")
+                .matcher(confirmation);
+
+        assertThat(matcher.find()).isTrue();
     }
 }

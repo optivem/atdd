@@ -15,7 +15,7 @@ public class ErpStubDsl {
     public void setupProduct(String... args) {
         var params = paramsFactory.create(args);
         var sku = params.getAlias("sku");
-        var price = params.getValue("price", "0");
+        var price = params.getValue("price", "10.00");
         erpStubDriver.setupProduct(sku, price);
     }
 }

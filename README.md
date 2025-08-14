@@ -9,18 +9,27 @@ This repository is under development. Please don't rely on it yet.
 
 MIT Licence
 
-## Local Execution
+## Installation
 
-Ensure Docker Deskop is running.
-Make sure you've setup JAVA_HOME and added the `bin` directory to your `PATH`.
-We're using JDK 24.
+1. Ensure Docker Deskop is running.
+2. Install JDK 24. 
+3. Setup JAVA_HOME environment variable to point to your JDK 24 installation.
+4. Add the JDK `bin` directory to your `PATH` environment variable (on Windows `%JAVA_HOME%\bin`, on Linux `$JAVA_HOME/bin`).
 
+## Usage
+
+Run Docker Compose to run the application:
 ```shell
 docker compose up -d
+```
+
+Compile and run tests using Gradle:
+
+```shell
 ./gradlew build
 ```
 
-For debugging:
+For more detailed output:
 
 ```shell
 ./gradlew build --info --stacktrace

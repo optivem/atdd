@@ -102,7 +102,7 @@ public class ShopAccTest {
     @MethodSource("purchaseParameters")
     void shouldCompletePurchaseSuccessfully(String price, String quantity, String totalPrice) {
         erpStub.setupProduct("sku: ABC", "price: " + price);
-        shop.placeOrder("sku: ABC", "quantity: " + quantity);
+        shop.placeOrder("orderNumber: ORD-1001", "sku: ABC", "quantity: " + quantity);
         shop.confirmOrder("totalPrice: " + totalPrice);
     }
 
@@ -110,8 +110,16 @@ public class ShopAccTest {
     @Channel({ChannelType.UI, ChannelType.API})
     public void shouldCompletePurchaseSuccessfullyThisIsSomePlainTest() {
         erpStub.setupProduct("sku: ABC", "price: 2.50");
-        shop.placeOrder("sku: ABC", "quantity: 5");
+        shop.placeOrder("orderNumber: ORD-1001", "sku: ABC", "quantity: 5");
         shop.confirmOrder("totalPrice: 12.50");
+    }
+
+    @TestTemplate
+    @Channel({ChannelType.UI, ChannelType.API})
+    public void shouldGenerateOrderNumber() {
+        erpStub.setupProduct("sku: ABC");
+        shop.placeOrder("orderNumber: ORD-1001", "sku: ABC");
+        shop.confirmOrderNumberGenerated("orderNumber: ORD-1001");
     }
 
 }

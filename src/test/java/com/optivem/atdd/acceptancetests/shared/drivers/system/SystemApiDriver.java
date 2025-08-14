@@ -2,10 +2,11 @@ package com.optivem.atdd.acceptancetests.shared.drivers.system;
 
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.http.MediaType;
-import reactor.core.publisher.Mono;
+
+import java.util.HashMap;
+import java.util.HashSet;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -13,6 +14,8 @@ public class SystemApiDriver implements SystemDriver {
     private final WebClient webClient;
     private final String baseUrl;
     private double lastTotalPrice;
+
+    private HashSet<String> orderNumbersGenerated = new HashSet<>();
 
     public SystemApiDriver(String baseUrl) {
         this.baseUrl = baseUrl;
@@ -31,7 +34,7 @@ public class SystemApiDriver implements SystemDriver {
     }
 
     @Override
-    public void submitOrder(String sku, String quantity) {
+    public void submitOrder(String key, String sku, String quantity) {
         var orderRequest = OrderRequest.builder()
                 .sku(sku)
                 .quantity(Integer.parseInt(quantity))
@@ -46,7 +49,18 @@ public class SystemApiDriver implements SystemDriver {
 
         var response = responseMono.block();
         if (response != null) {
+            // TODO: VJ, should actually inspect the order number non-null
+            orderNumbersGenerated.add(key);
             lastTotalPrice = response.getTotalPrice();
+        }
+    }
+
+    @Override
+    public void confirmOrderNumberGenerated(String key) {
+        var isOrderNumberGenerated = orderNumbersGenerated.contains(key);
+
+        if(!isOrderNumberGenerated) {
+            fail("Order number was not generated for key: " + key);
         }
     }
 
@@ -57,6 +71,8 @@ public class SystemApiDriver implements SystemDriver {
             fail("Expected total price: " + expected + ", but was: " + lastTotalPrice);
         }
     }
+
+
 
     @Data
     @Builder

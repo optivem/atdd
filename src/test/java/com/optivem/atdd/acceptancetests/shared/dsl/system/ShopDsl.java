@@ -18,14 +18,22 @@ public class ShopDsl {
     public void placeOrder(String... args) {
         driver.load();
         var params = paramsFactory.create(args);
+        var key = params.getAlias("orderNumber");
         var sku = params.getAlias("sku");
-        var quantity = params.getValue("quantity", "1");
-        driver.submitOrder(sku, quantity);
+        var quantity = params.getValue("quantity", "20");
+        driver.submitOrder(key, sku, quantity);
     }
 
     public void confirmOrder(String... args) {
         var params = paramsFactory.create(args);
-        var expectedPrice = params.getValue("totalPrice", "");
+        var expectedPrice = params.getValue("totalPrice", "150.00");
         driver.confirmTotalPriceEquals(expectedPrice);
+    }
+
+    public void confirmOrderNumberGenerated(String... args) {
+        var params = paramsFactory.create(args);
+        var key = params.getAlias("orderNumber");
+
+        driver.confirmOrderNumberGenerated(key);
     }
 }

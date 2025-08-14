@@ -4,7 +4,9 @@ public interface SystemDriver {
 
     void load();
 
-    void submitOrder(String sku, String quantity);
+    void submitOrder(String key, String sku, String quantity);
 
     void confirmTotalPriceEquals(String expectedTotalPrice);
+
+    void confirmOrderNumberGenerated(String key);
 }
