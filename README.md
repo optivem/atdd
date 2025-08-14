@@ -1,7 +1,8 @@
 # ATDD
 Acceptance Test Driven Development (ATDD)
 
-[![Java CI with Gradle](https://github.com/optivem/atdd/actions/workflows/gradle.yml/badge.svg)](https://github.com/optivem/atdd/actions/workflows/gradle.yml)
+[![Commit Stage](https://github.com/optivem/atdd/actions/workflows/commit-stage.yml/badge.svg)](https://github.com/optivem/atdd/actions/workflows/commit-stage.yml)
+[![Acceptance Stage](https://github.com/optivem/atdd/actions/workflows/acceptance-stage.yml/badge.svg)](https://github.com/optivem/atdd/actions/workflows/acceptance-stage.yml)
 
 This repository is under development. Please don't rely on it yet.
 

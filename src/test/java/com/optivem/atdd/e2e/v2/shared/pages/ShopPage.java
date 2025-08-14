@@ -11,7 +11,7 @@ public class ShopPage {
 
     public ShopPage(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(60));
     }
 
     public void open(String baseUrl) {

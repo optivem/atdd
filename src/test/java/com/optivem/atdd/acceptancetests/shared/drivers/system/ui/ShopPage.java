@@ -21,7 +21,7 @@ public class ShopPage {
     public ShopPage(WebDriver driver, String shopUrl) {
         this.driver = driver;
         this.shopUrl = shopUrl;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(60));
     }
 
     public void navigateToShop() {

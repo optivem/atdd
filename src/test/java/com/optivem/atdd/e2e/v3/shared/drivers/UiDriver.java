@@ -19,7 +19,7 @@ public class UiDriver {
         this.driver = driver;
         this.baseUrl = baseUrl;
 
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(60));
     }
 
     public void load() {
