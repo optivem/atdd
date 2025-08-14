@@ -12,8 +12,6 @@ import java.util.regex.Pattern;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SystemUiDriver implements SystemDriver {
-    private final WebDriver driver;
-    private final String shopUrl;
     private final ShopPage shopPage;
 
     private static final Pattern ORDER_CONFIRMATION_PATTERN = Pattern.compile(
@@ -24,14 +22,12 @@ public class SystemUiDriver implements SystemDriver {
     private static final int TOTAL_PRICE_GROUP = 2;
 
     public SystemUiDriver(WebDriver driver, String shopUrl) {
-        this.driver = driver;
-        this.shopUrl = shopUrl;
-        this.shopPage = new ShopPage(driver);
+        this.shopPage = new ShopPage(driver, shopUrl);
     }
 
     @Override
     public void load() {
-        driver.get(shopUrl);
+        shopPage.navigateToShop();
     }
 
     @Override

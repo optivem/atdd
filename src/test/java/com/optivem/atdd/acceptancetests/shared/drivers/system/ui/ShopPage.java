@@ -14,12 +14,18 @@ public class ShopPage {
     private static final String ALERT_ROLE = "[role='alert']";
 
     private final WebDriver driver;
+    private final String shopUrl;
 
     private final WebDriverWait wait;
 
-    public ShopPage(WebDriver driver) {
+    public ShopPage(WebDriver driver, String shopUrl) {
         this.driver = driver;
+        this.shopUrl = shopUrl;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    }
+
+    public void navigateToShop() {
+        driver.get(shopUrl);
     }
 
     public void enterSku(String sku) {
