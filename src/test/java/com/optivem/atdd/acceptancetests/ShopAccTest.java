@@ -103,7 +103,7 @@ public class ShopAccTest {
     void shouldCompletePurchaseSuccessfully(String price, String quantity, String totalPrice) {
         erpStub.setupProduct("sku: ABC", "price: " + price);
         shop.placeOrder("orderNumber: ORD-1001", "sku: ABC", "quantity: " + quantity);
-        shop.confirmOrder("totalPrice: " + totalPrice);
+        shop.confirmOrder("orderNumber: ORD-1001", "totalPrice: " + totalPrice);
     }
 
     @TestTemplate
@@ -111,7 +111,7 @@ public class ShopAccTest {
     public void shouldCompletePurchaseSuccessfullyThisIsSomePlainTest() {
         erpStub.setupProduct("sku: ABC", "price: 2.50");
         shop.placeOrder("orderNumber: ORD-1001", "sku: ABC", "quantity: 5");
-        shop.confirmOrder("totalPrice: 12.50");
+        shop.confirmOrder("orderNumber: ORD-1001", "totalPrice: 12.50");
     }
 
     @TestTemplate

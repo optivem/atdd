@@ -22,17 +22,20 @@ public class SystemUiDriver implements SystemDriver {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
+    @Override
     public void load() {
         driver.get(shopUrl);
     }
 
-    public void submitOrder(String key, String sku, String quantity) {
+    @Override
+    public void submitOrder(String orderNumber, String sku, String quantity) {
         driver.findElement(By.cssSelector("[aria-label='SKU']")).sendKeys(sku);
         driver.findElement(By.cssSelector("[aria-label='Quantity']")).sendKeys(quantity);
         driver.findElement(By.cssSelector("[aria-label='Place Order']")).click();
     }
 
-    public void confirmTotalPriceEquals(String expectedTotalPrice) {
+    @Override
+    public void confirmTotalPriceEquals(String orderNumber, String expectedTotalPrice) {
         var confirmationElement = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[role='alert']"))
         );
@@ -47,7 +50,7 @@ public class SystemUiDriver implements SystemDriver {
     }
 
     @Override
-    public void confirmOrderNumberGenerated(String key) {
+    public void confirmOrderNumberGenerated(String orderNumber) {
 
         // TODO: VJ: Rework this
 

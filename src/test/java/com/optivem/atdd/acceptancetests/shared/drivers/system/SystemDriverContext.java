@@ -57,18 +57,18 @@ public class SystemDriverContext implements SystemDriver {
     }
 
     @Override
-    public void submitOrder(String key, String sku, String quantity) {
-        getActiveDriver().submitOrder(key, sku, quantity);
+    public void submitOrder(String orderNumber, String sku, String quantity) {
+        getActiveDriver().submitOrder(orderNumber, sku, quantity);
     }
 
     @Override
-    public void confirmTotalPriceEquals(String expectedTotalPrice) {
-        getActiveDriver().confirmTotalPriceEquals(expectedTotalPrice);
+    public void confirmTotalPriceEquals(String orderNumber, String expectedTotalPrice) {
+        getActiveDriver().confirmTotalPriceEquals(orderNumber, expectedTotalPrice);
     }
 
     @Override
-    public void confirmOrderNumberGenerated(String key) {
-        getActiveDriver().confirmOrderNumberGenerated(key);
+    public void confirmOrderNumberGenerated(String orderNumber) {
+        getActiveDriver().confirmOrderNumberGenerated(orderNumber);
     }
 
 
