@@ -1,5 +1,6 @@
 package com.optivem.atdd.api.controller;
 
+import com.optivem.atdd.common.OrderStorage;
 import com.optivem.atdd.common.PriceCalculator;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,8 +12,6 @@ import java.util.UUID;
 
 @RestController
 public class ShopApiController {
-    // TODO: VJ: Replace with actual database
-    private final HashMap<String, Double> orderPrices = new HashMap<>();
 
     @Value("${erp.url}")
     private String erpUrl;
@@ -28,7 +27,7 @@ public class ShopApiController {
         var sku = request.getSku();
         var quantity = request.getQuantity();
         var totalPrice = PriceCalculator.calculatePrice(erpUrl, sku, quantity);
-        orderPrices.put(orderNumber, totalPrice);
+        OrderStorage.saveOrder(orderNumber, totalPrice);
 
         var response = new PlaceOrderResponse();
         response.setOrderNumber(orderNumber);
@@ -38,7 +37,7 @@ public class ShopApiController {
 
     @GetMapping("/api/shop/order/{orderNumber}")
     public ResponseEntity<GetOrderResponse> getOrder(@PathVariable String orderNumber) {
-        var totalPrice = orderPrices.get(orderNumber);
+        var totalPrice = OrderStorage.getOrderPrice(orderNumber);
 
         var response = new GetOrderResponse();
         response.setOrderNumber(orderNumber);
