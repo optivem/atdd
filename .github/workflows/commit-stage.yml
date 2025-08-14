@@ -36,13 +36,13 @@ jobs:
         run: ./gradlew build --info --stacktrace
 
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag eshop-monolith:$(date +%s)
+        run: docker build . --file Dockerfile --tag eshop-monolith:${{ github.sha }}
 
       - name: Log in to GitHub Container Registry
         run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
       - name: Tag Docker image
-        run: docker tag eshop-monolith:$(date +%s) ghcr.io/${{ github.repository }}/eshop-monolith:latest
+        run: docker tag eshop-monolith:${{ github.sha }} ghcr.io/${{ github.repository }}/eshop-monolith:latest
 
       - name: Push Docker image
         run: docker push ghcr.io/${{ github.repository }}/eshop-monolith:latest
