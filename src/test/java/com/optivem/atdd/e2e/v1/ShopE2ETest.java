@@ -28,7 +28,7 @@ class ShopE2ETest {
     @BeforeEach
     void setUp() {
         ChromeOptions options = new ChromeOptions();
-//        options.addArguments("--headless=new");
+        options.addArguments("--headless=new");
         seleniumDriver = new ChromeDriver(options);
 
         baseUrl = "http://localhost:" + port; // NOTE: VJ: In real life we'd want to set the actual string
