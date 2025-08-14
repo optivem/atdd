@@ -15,6 +15,13 @@ public class SystemUiDriver implements SystemDriver {
     private final String shopUrl;
     private final WebDriverWait wait;
 
+    private static final Pattern ORDER_CONFIRMATION_PATTERN = Pattern.compile(
+            "Success! Order has been created with Order Number (\\w+) and Total Price \\$(\\d+(?:\\.\\d{2})?)"
+    );
+
+    private static final int ORDER_NUMBER_GROUP = 1;
+    private static final int TOTAL_PRICE_GROUP = 2;
+
     public SystemUiDriver(WebDriver driver, String shopUrl) {
         this.driver = driver;
         this.shopUrl = shopUrl;
@@ -42,11 +49,11 @@ public class SystemUiDriver implements SystemDriver {
 
         var confirmation = confirmationElement.getText();
 
-        var matcher = Pattern.compile("Success! Total Price is \\$(\\d+(?:\\.\\d{2})?)")
+        var matcher = ORDER_CONFIRMATION_PATTERN
                 .matcher(confirmation);
 
         assertThat(matcher.find()).isTrue();
-        assertThat(matcher.group(1)).isEqualTo(expectedTotalPrice);
+        assertThat(matcher.group(TOTAL_PRICE_GROUP)).isEqualTo(expectedTotalPrice);
     }
 
     @Override
@@ -60,9 +67,10 @@ public class SystemUiDriver implements SystemDriver {
 
         var confirmation = confirmationElement.getText();
 
-        var matcher = Pattern.compile("Success! Total Price is \\$(\\d+(?:\\.\\d{2})?)")
+        var matcher = ORDER_CONFIRMATION_PATTERN
                 .matcher(confirmation);
 
         assertThat(matcher.find()).isTrue();
+        assertThat(matcher.group(ORDER_NUMBER_GROUP)).isNotEmpty();
     }
 }

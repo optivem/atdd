@@ -1,5 +1,6 @@
 package com.optivem.atdd.api.controller;
 
+import com.optivem.atdd.common.Order;
 import com.optivem.atdd.common.OrderStorage;
 import com.optivem.atdd.common.PriceCalculator;
 import lombok.Data;
@@ -23,11 +24,13 @@ public class ShopApiController {
 
     @PostMapping("/api/shop/order")
     public ResponseEntity<PlaceOrderResponse> placeOrder(@RequestBody PlaceOrderRequest request) {
-        var orderNumber = "ORD-" + UUID.randomUUID().toString();
+        var orderNumber = OrderStorage.nextOrderNumber();
         var sku = request.getSku();
         var quantity = request.getQuantity();
         var totalPrice = PriceCalculator.calculatePrice(erpUrl, sku, quantity);
-        OrderStorage.saveOrder(orderNumber, totalPrice);
+        var order = new Order(orderNumber, sku, quantity, totalPrice);
+
+        OrderStorage.saveOrder(order);
 
         var response = new PlaceOrderResponse();
         response.setOrderNumber(orderNumber);
@@ -37,7 +40,8 @@ public class ShopApiController {
 
     @GetMapping("/api/shop/order/{orderNumber}")
     public ResponseEntity<GetOrderResponse> getOrder(@PathVariable String orderNumber) {
-        var totalPrice = OrderStorage.getOrderPrice(orderNumber);
+        var order = OrderStorage.getOrder(orderNumber);
+        var totalPrice = order.getTotalPrice();
 
         var response = new GetOrderResponse();
         response.setOrderNumber(orderNumber);

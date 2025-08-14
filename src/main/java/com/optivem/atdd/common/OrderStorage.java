@@ -1,16 +1,21 @@
 package com.optivem.atdd.common;
 
 import java.util.HashMap;
+import java.util.UUID;
 
 public class OrderStorage {
     // TODO: VJ: Replace with actual database
-    private static final HashMap<String, Double> orderPrices = new HashMap<>();
+    private static final HashMap<String, Order> orders = new HashMap<>();
 
-    public static void saveOrder(String orderNumber, double totalPrice) {
-        orderPrices.put(orderNumber, totalPrice);
+    public static void saveOrder(Order order) {
+        orders.put(order.getOrderNumber(), order);
     }
 
-    public static double getOrderPrice(String orderNumber) {
-        return orderPrices.get(orderNumber);
+    public static Order getOrder(String orderNumber) {
+        return orders.get(orderNumber);
+    }
+
+    public static String nextOrderNumber() {
+        return "ORD-" + UUID.randomUUID().toString();
     }
 }

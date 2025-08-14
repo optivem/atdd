@@ -1,5 +1,7 @@
 package com.optivem.atdd.mvc.controller;
 
+import com.optivem.atdd.common.Order;
+import com.optivem.atdd.common.OrderStorage;
 import com.optivem.atdd.common.PriceCalculator;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -31,7 +33,11 @@ public class ShopMvcController {
     @PostMapping("/shop")
     @ResponseBody
     public String placeOrder(@RequestParam String sku, @RequestParam int quantity) {
-        double totalPrice = PriceCalculator.calculatePrice(erpUrl, sku, quantity);
+        var orderNumber = OrderStorage.nextOrderNumber();
+        var totalPrice = PriceCalculator.calculatePrice(erpUrl, sku, quantity);
+        var order = new Order(orderNumber, sku, quantity, totalPrice);
+        OrderStorage.saveOrder(order);
+
         return """
             <html>
             <body>
