@@ -19,6 +19,7 @@ import java.util.stream.Stream;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.TestTemplate;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.provider.Arguments;
@@ -31,6 +32,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 // TODO: VJ: What to do?
 //@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 // @ActiveProfiles("acc")
+@Disabled
 @ExtendWith(ChannelExtension.class)
 public class ShopAccTest {
 

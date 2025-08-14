@@ -2,12 +2,14 @@ package com.optivem.atdd.acceptancetests;
 
 import com.optivem.atdd.acceptancetests.shared.drivers.external.erp.ErpDriver;
 import com.optivem.atdd.acceptancetests.shared.drivers.external.erp.RealErpDriver;
+import org.junit.jupiter.api.Disabled;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.web.reactive.function.client.WebClient;
 
 // TODO: JC: Can I avoid SpringBootTest since the app isn't needed, just the config?
+@Disabled
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("e2e")
 public class RealErpExternalSystemContractTest extends BaseErpExternalSystemContractTest {

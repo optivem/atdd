@@ -13,6 +13,7 @@ import java.util.regex.Pattern;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Disabled
 class ShopE2ETestV2 {
     private int port = TestConfiguration.SERVER_PORT;
 

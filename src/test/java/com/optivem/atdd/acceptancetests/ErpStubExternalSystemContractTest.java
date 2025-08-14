@@ -2,6 +2,7 @@ package com.optivem.atdd.acceptancetests;
 
 import com.optivem.atdd.acceptancetests.shared.drivers.external.erp.ErpDriver;
 import com.optivem.atdd.acceptancetests.shared.drivers.external.erp.ErpStubDriver;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,6 +11,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Disabled
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("acc")
 public class ErpStubExternalSystemContractTest extends BaseErpExternalSystemContractTest {

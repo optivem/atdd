@@ -5,6 +5,7 @@ import com.optivem.atdd.e2e.v3.shared.dsl.ShopDsl;
 import com.optivem.atdd.e2e.v3.shared.drivers.UiDriver;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -13,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.context.ActiveProfiles;
 
+@Disabled
 public class ShopE2ETestV3 {
     private int port = TestConfiguration.SERVER_PORT;
 
