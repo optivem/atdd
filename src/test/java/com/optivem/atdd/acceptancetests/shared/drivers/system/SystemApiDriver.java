@@ -10,25 +10,21 @@ import java.util.HashMap;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class SystemApiDriver implements SystemDriver {
-    private final WebClient webClient;
-    private final String baseUrl;
-
     private HashMap<String, String> orderNumbers = new HashMap<>();
 
+    private final ShopClient client;
+
     public SystemApiDriver(String baseUrl) {
-        this.baseUrl = baseUrl;
-        this.webClient = WebClient.builder()
+        var webClient = WebClient.builder()
                 .baseUrl(baseUrl)
                 .build();
+
+        this.client = new ShopClient(webClient);
     }
 
     @Override
     public void load() {
-        webClient.get()
-                .uri("/api/shop/echo")
-                .retrieve()
-                .bodyToMono(Void.class)
-                .block();
+        client.echo();
     }
 
     @Override
@@ -38,20 +34,16 @@ public class SystemApiDriver implements SystemDriver {
                 .quantity(Integer.parseInt(quantity))
                 .build();
 
-        var responseMono = webClient.post()
-                .uri("/api/shop/order")
-                .contentType(MediaType.APPLICATION_JSON)
-                .bodyValue(orderRequest)
-                .retrieve()
-                .bodyToMono(PlaceOrderResponse.class);
+        var response = client.placeOrder(orderRequest);
 
-        var response = responseMono.block();
         if (response != null) {
-            var externalOrderNumber = response.orderNumber;
+            var externalOrderNumber = response.getOrderNumber();
             // TODO: VJ, should actually inspect the order number non-null
             orderNumbers.put(orderNumber, externalOrderNumber);
         }
     }
+
+
 
     @Override
     public void confirmOrderNumberGenerated(String orderNumber) {
@@ -68,12 +60,7 @@ public class SystemApiDriver implements SystemDriver {
 
         var externalOrderNumber = orderNumbers.get(orderNumber);
 
-        var responseMono = webClient.get()
-                .uri("/api/shop/order/{orderNumber}", externalOrderNumber)
-                .retrieve()
-                .bodyToMono(GetOrderResponse.class);
-
-        var response = responseMono.block();
+        var response = client.getOrder(externalOrderNumber);
         if (response == null || Double.compare(expected, response.getTotalPrice()) != 0) {
             fail("Expected total price: " + expected + ", but was: " + (response != null ? response.getTotalPrice() : "null"));
         }
@@ -99,6 +86,40 @@ public class SystemApiDriver implements SystemDriver {
     }
 
     public class ShopClient {
+        private final WebClient webClient;
 
+        public ShopClient(WebClient webClient) {
+            this.webClient = webClient;
+        }
+
+        public void echo() {
+            webClient.get()
+                    .uri("/api/shop/echo")
+                    .retrieve()
+                    .bodyToMono(Void.class)
+                    .block();
+        }
+
+        public PlaceOrderResponse placeOrder(PlaceOrderRequest orderRequest) {
+            var responseMono = webClient.post()
+                    .uri("/api/shop/order")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .bodyValue(orderRequest)
+                    .retrieve()
+                    .bodyToMono(PlaceOrderResponse.class);
+
+            var response = responseMono.block();
+            return response;
+        }
+
+        public GetOrderResponse getOrder(String externalOrderNumber) {
+            var responseMono = webClient.get()
+                    .uri("/api/shop/order/{orderNumber}", externalOrderNumber)
+                    .retrieve()
+                    .bodyToMono(GetOrderResponse.class);
+
+            var response = responseMono.block();
+            return response;
+        }
     }
 }
