@@ -1,4 +1,3 @@
-version: '3.8'
 services:
   eshop-monolith:
     image: ghcr.io/optivem/atdd/eshop-monolith:latest

@@ -1,4 +1,3 @@
-version: '3.8'
 services:
   eshop-monolith:
     image: ghcr.io/optivem/atdd/eshop-monolith:latest
@@ -6,7 +5,7 @@ services:
       - "8080:8080"
     environment:
       - SPRING_PROFILES_ACTIVE=acc
-      - ERP_URL=http://localhost:8089
+      - ERP_URL=http://wiremock:8080
     depends_on:
       - wiremock
 

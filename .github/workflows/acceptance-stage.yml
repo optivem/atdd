@@ -33,11 +33,18 @@ jobs:
         java-version: '24'
         distribution: 'temurin'
 
-#    - name: Run Docker Compose Up
-#      run: docker compose up -d
-#
-#    - name: Run Acceptance Tests
-#      run: ./gradlew test --tests com.optivem.atdd.acceptancetests.ShopAccTest
+    - name: Setup Acceptance Test Environment
+      run: docker compose -f docker-compose.acc.yml up -d
+      # NOTE: In real life applications, you'd be deploying your System to Acceptance Environment
+      # For this demo application, I'm using Docker Compose
+
+    - name: Run Acceptance Tests
+      run: ./gradlew test --tests com.optivem.atdd.acceptancetests.ShopAccTest
+
+    - name: Destroy Acceptance Test Environment
+      run: docker compose -f docker-compose.acc.yml down
+      # Note: In real life applications, your choice whether to have transient or permament
+      # Here I destroyed it due to Docker Compose
 
 # TODO: Run the External System Contract Tests, stubs then real
 
