@@ -6,14 +6,12 @@ import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.http.MediaType;
 
 import java.util.HashMap;
-import java.util.HashSet;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class SystemApiDriver implements SystemDriver {
     private final WebClient webClient;
     private final String baseUrl;
-    private double lastTotalPrice;
 
     private HashMap<String, String> orderNumbers = new HashMap<>();
 
@@ -35,7 +33,7 @@ public class SystemApiDriver implements SystemDriver {
 
     @Override
     public void submitOrder(String orderNumber, String sku, String quantity) {
-        var orderRequest = OrderRequest.builder()
+        var orderRequest = PlaceOrderRequest.builder()
                 .sku(sku)
                 .quantity(Integer.parseInt(quantity))
                 .build();
@@ -45,15 +43,13 @@ public class SystemApiDriver implements SystemDriver {
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(orderRequest)
                 .retrieve()
-                .bodyToMono(OrderResponse.class);
+                .bodyToMono(PlaceOrderResponse.class);
 
         var response = responseMono.block();
         if (response != null) {
             var externalOrderNumber = response.orderNumber;
             // TODO: VJ, should actually inspect the order number non-null
             orderNumbers.put(orderNumber, externalOrderNumber);
-
-            lastTotalPrice = response.getTotalPrice();
         }
     }
 
@@ -75,7 +71,7 @@ public class SystemApiDriver implements SystemDriver {
         var responseMono = webClient.get()
                 .uri("/api/shop/order/{orderNumber}", externalOrderNumber)
                 .retrieve()
-                .bodyToMono(OrderResponse.class);
+                .bodyToMono(GetOrderResponse.class);
 
         var response = responseMono.block();
         if (response == null || Double.compare(expected, response.getTotalPrice()) != 0) {
@@ -84,17 +80,25 @@ public class SystemApiDriver implements SystemDriver {
     }
 
 
-
     @Data
     @Builder
-    public static class OrderRequest {
+    public static class PlaceOrderRequest {
         private String sku;
         private int quantity;
     }
 
     @Data
-    public static class OrderResponse {
+    public static class PlaceOrderResponse {
+        private String orderNumber;
+    }
+
+    @Data
+    public static class GetOrderResponse {
         private String orderNumber;
         private double totalPrice;
+    }
+
+    public class ShopClient {
+
     }
 }
