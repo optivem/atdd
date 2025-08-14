@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  eshop-monolith:
+    image: ghcr.io/optivem/atdd/eshop-monolith:latest
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=e2e
+      - ERP_URL=https://optivem.free.beeceptor.com/sap-test/api

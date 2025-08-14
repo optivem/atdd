@@ -21,7 +21,12 @@ MIT Licence
 
 Run Docker Compose to run the application:
 ```shell
-docker compose up -d
+docker compose -f docker-compose.acc.yml up -d
+docker compose -f docker-compose.acc.yml down
+
+docker compose -f docker-compose.e2e.yml up -d
+docker compose -f docker-compose.e2e.yml down
+
 ```
 
 Compile and run tests using Gradle:

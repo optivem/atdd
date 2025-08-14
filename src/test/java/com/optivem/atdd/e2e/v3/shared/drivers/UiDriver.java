@@ -1,5 +1,6 @@
 package com.optivem.atdd.e2e.v3.shared.drivers;
 
+import com.optivem.atdd.TestConfiguration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -19,7 +20,7 @@ public class UiDriver {
         this.driver = driver;
         this.baseUrl = baseUrl;
 
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(60));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(TestConfiguration.WAIT_SECONDS));
     }
 
     public void load() {

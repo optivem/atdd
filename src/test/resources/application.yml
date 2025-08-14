@@ -1,0 +1,17 @@
+
+---
+spring:
+  config:
+    activate:
+      on-profile: e2e
+erp:
+  url: https://optivem.free.beeceptor.com/sap-test/api
+
+---
+spring:
+  config:
+    activate:
+      on-profile: acc
+
+erp:
+  url: http://localhost:8089

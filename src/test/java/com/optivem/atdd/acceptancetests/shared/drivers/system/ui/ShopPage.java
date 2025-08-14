@@ -1,5 +1,6 @@
 package com.optivem.atdd.acceptancetests.shared.drivers.system.ui;
 
+import com.optivem.atdd.TestConfiguration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -21,7 +22,7 @@ public class ShopPage {
     public ShopPage(WebDriver driver, String shopUrl) {
         this.driver = driver;
         this.shopUrl = shopUrl;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(60));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(TestConfiguration.WAIT_SECONDS));
     }
 
     public void navigateToShop() {

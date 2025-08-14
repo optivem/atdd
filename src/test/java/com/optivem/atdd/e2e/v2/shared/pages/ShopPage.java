@@ -1,5 +1,6 @@
 package com.optivem.atdd.e2e.v2.shared.pages;
 
+import com.optivem.atdd.TestConfiguration;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.*;
 
@@ -11,7 +12,7 @@ public class ShopPage {
 
     public ShopPage(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(60));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(TestConfiguration.WAIT_SECONDS));
     }
 
     public void open(String baseUrl) {

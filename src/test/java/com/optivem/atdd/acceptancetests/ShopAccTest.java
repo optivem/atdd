@@ -1,5 +1,6 @@
 package com.optivem.atdd.acceptancetests;
 
+import com.optivem.atdd.TestConfiguration;
 import com.optivem.atdd.acceptancetests.shared.channels.Channel;
 import com.optivem.atdd.acceptancetests.shared.channels.ChannelExtension;
 import com.optivem.atdd.acceptancetests.shared.channels.ChannelType;
@@ -25,23 +26,19 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.web.reactive.function.client.WebClient;
 
-
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ActiveProfiles("acc")
+// TODO: VJ: What to do?
+//@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+// @ActiveProfiles("acc")
 @ExtendWith(ChannelExtension.class)
 public class ShopAccTest {
 
-    @LocalServerPort
-    private int port;
+//    @LocalServerPort
+    private int port = TestConfiguration.SERVER_PORT;
 
-    @Value("${erp.url}")
-    private String erpUrl;
+    // @Value("${erp.url}") // TODO: VJ: what to do?
+    private String erpUrl = TestConfiguration.ERP_URL_ACC;
 
     private WebDriver seleniumDriver;
     private String baseUrl;

@@ -50,7 +50,7 @@ class ShopE2ETest {
         var placeOrderButton = seleniumDriver.findElement(By.cssSelector("[aria-label='Place Order']"));
         placeOrderButton.click();
 
-        var wait = new WebDriverWait(seleniumDriver, Duration.ofSeconds(60));
+        var wait = new WebDriverWait(seleniumDriver, Duration.ofSeconds(TestConfiguration.WAIT_SECONDS));
         var confirmationMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[role='alert']")));
 
         var confirmationMessageText = confirmationMessage.getText();
