@@ -1,5 +1,6 @@
 package com.optivem.atdd.e2e.v1;
 
+import com.optivem.atdd.TestConfiguration;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -15,12 +16,8 @@ import java.util.regex.Pattern;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-//@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-//@ActiveProfiles("e2e")
 class ShopE2ETest {
-
-//    @LocalServerPort
-    private int port = 8080; // TODO: VJ: This should come from Environment perhaps
+    private int port = TestConfiguration.SERVER_PORT;
 
     private WebDriver seleniumDriver;
     private String baseUrl;

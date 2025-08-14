@@ -1,5 +1,6 @@
 package com.optivem.atdd.e2e.v2;
 
+import com.optivem.atdd.TestConfiguration;
 import com.optivem.atdd.e2e.v2.shared.pages.ShopPage;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.*;
@@ -12,12 +13,8 @@ import java.util.regex.Pattern;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ActiveProfiles("e2e")
 class ShopE2ETestV2 {
-
-    @LocalServerPort
-    private int port;
+    private int port = TestConfiguration.SERVER_PORT;
 
     private WebDriver seleniumDriver;
     private String baseUrl;
