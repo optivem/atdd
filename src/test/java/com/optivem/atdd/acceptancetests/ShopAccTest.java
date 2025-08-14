@@ -32,7 +32,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 // TODO: VJ: What to do?
 //@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 // @ActiveProfiles("acc")
-@Disabled
 @ExtendWith(ChannelExtension.class)
 public class ShopAccTest {
 

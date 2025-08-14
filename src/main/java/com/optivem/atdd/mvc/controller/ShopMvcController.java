@@ -9,10 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class ShopMvcController {
-
-    @Value("${erp.url}")
-    private String erpUrl;
-
     @GetMapping("/shop")
     @ResponseBody
     public String shopPage() {
@@ -34,7 +30,7 @@ public class ShopMvcController {
     @ResponseBody
     public String placeOrder(@RequestParam String sku, @RequestParam int quantity) {
         var orderNumber = OrderStorage.nextOrderNumber();
-        var totalPrice = PriceCalculator.calculatePrice(erpUrl, sku, quantity);
+        var totalPrice = PriceCalculator.calculatePrice(sku, quantity);
         var order = new Order(orderNumber, sku, quantity, totalPrice);
         OrderStorage.saveOrder(order);
 

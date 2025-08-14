@@ -9,13 +9,16 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 public class PriceCalculator {
-    public static double calculatePrice(String erpUrl, String sku, int quantity) {
-        var price = getPrice(erpUrl, sku);
+    public static double calculatePrice(String sku, int quantity) {
+        var price = getPrice(sku);
         return price * quantity;
     }
 
-    private static double getPrice(String erpUrl, String sku) {
+    private static double getPrice(String sku) {
         try {
+            var erpUrl = System.getenv("ERP_URL");
+            System.out.println("Going to contact: " + erpUrl);
+
             var url = erpUrl + "/products/" + sku;
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder()

@@ -13,10 +13,6 @@ import java.util.UUID;
 
 @RestController
 public class ShopApiController {
-
-    @Value("${erp.url}")
-    private String erpUrl;
-
     @GetMapping("/api/shop/echo")
     public ResponseEntity<Void> echo() {
         return ResponseEntity.ok().build();
@@ -27,7 +23,7 @@ public class ShopApiController {
         var orderNumber = OrderStorage.nextOrderNumber();
         var sku = request.getSku();
         var quantity = request.getQuantity();
-        var totalPrice = PriceCalculator.calculatePrice(erpUrl, sku, quantity);
+        var totalPrice = PriceCalculator.calculatePrice(sku, quantity);
         var order = new Order(orderNumber, sku, quantity, totalPrice);
 
         OrderStorage.saveOrder(order);
