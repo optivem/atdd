@@ -1,11 +1,16 @@
 services:
+
+  eshop-monolith:
+    image: ghcr.io/optivem/atdd/eshop-monolith:latest
+    ports:
+      - "8080:8080"
+    environment:
+      - ERP_URL=https://optivem.free.beeceptor.com/sap/api
+      - SERVER_PORT=8080
+
   wiremock:
     image: wiremock/wiremock:3.5.2
     ports:
       - "8089:8080"
-#    volumes:
-    # Uncomment and set your mappings folder if you want to use custom stubs
-    # - ./wiremock/mappings:/home/wiremock/mappings
-    # - ./wiremock/__files:/home/wiremock/__files
     environment:
       - WIREMOCK_OPTIONS=--verbose

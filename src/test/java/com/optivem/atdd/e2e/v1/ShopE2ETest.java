@@ -15,12 +15,12 @@ import java.util.regex.Pattern;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ActiveProfiles("e2e")
+//@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+//@ActiveProfiles("e2e")
 class ShopE2ETest {
 
-    @LocalServerPort
-    private int port;
+//    @LocalServerPort
+    private int port = 8080; // TODO: VJ: This should come from Environment perhaps
 
     private WebDriver seleniumDriver;
     private String baseUrl;
@@ -28,7 +28,7 @@ class ShopE2ETest {
     @BeforeEach
     void setUp() {
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless=new");
+//        options.addArguments("--headless=new");
         seleniumDriver = new ChromeDriver(options);
 
         baseUrl = "http://localhost:" + port; // NOTE: VJ: In real life we'd want to set the actual string
